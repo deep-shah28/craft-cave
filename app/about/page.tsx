@@ -38,13 +38,13 @@ export default function AboutPage() {
                 </p>
               </div>
             </div>
-            <div className="relative">
+            <div className="flex justify-center">
               <Image
-                src="https://images.unsplash.com/photo-1602874801006-47670818b8ee?w=500&h=400&fit=crop"
-                alt="Artisan crafting candles"
-                width={500}
-                height={400}
-                className="rounded-lg shadow-lg object-cover w-full h-80"
+                src="/images/Subject.png"
+                alt="Craft Cave artisan with premium candles"
+                width={300}
+                height={350}
+                className="object-contain h-80 w-auto"
               />
             </div>
           </div>
@@ -106,7 +106,7 @@ export default function AboutPage() {
       </section>
 
       {/* Team Section */}
-      <section className="py-16">
+      {/* <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-stone-900 mb-4">Meet Our Team</h2>
@@ -150,7 +150,7 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Section */}
       <section className="py-16 bg-amber-800">

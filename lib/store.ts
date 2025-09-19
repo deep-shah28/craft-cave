@@ -9,6 +9,7 @@ export interface Product {
   originalPrice?: number
   image: string
   images: string[]
+  videos?: string[] // Support for product videos
   description: string
   category: string
   productType: 'candle' | 'hamper' | 'basket' | 'accessory' | 'combo'

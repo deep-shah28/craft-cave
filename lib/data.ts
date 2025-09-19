@@ -239,6 +239,20 @@ export const sampleProducts: Product[] = [
     inStock: true,
     size: 'Premium Set',
     comboItems: ['3', '4', 'acc-2', 'acc-4', 'basket-2']
+  },
+  {
+    id: 'hamper-3',
+    name: 'Craft Cave Special Hamper',
+    price: 2999,
+    originalPrice: 3999,
+    image: '/images/hamper1.jpeg',
+    images: ['/images/hamper1.jpeg'],
+    description: 'Our signature hamper featuring a curated selection of premium candles and accessories. Perfect for gifting or treating yourself.',
+    category: 'Hampers',
+    productType: 'hamper',
+    inStock: true,
+    size: 'Special Set',
+    comboItems: ['1', '2', 'acc-1', 'acc-3', 'basket-1']
   }
 ]
 

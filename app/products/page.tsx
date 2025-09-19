@@ -11,7 +11,7 @@ export default function ProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [sortBy, setSortBy] = useState('name')
   const [viewMode, setViewMode] = useState('grid')
-  const [priceRange, setPriceRange] = useState([0, 2000])
+  const [priceRange, setPriceRange] = useState([0, 5000])
   const [showFilters, setShowFilters] = useState(false)
 
   useEffect(() => {
@@ -99,7 +99,7 @@ export default function ProductsPage() {
                     <input
                       type="range"
                       min="0"
-                      max="2000"
+                      max="5000"
                       step="100"
                       value={priceRange[1]}
                       onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
@@ -112,7 +112,7 @@ export default function ProductsPage() {
                 <button
                   onClick={() => {
                     setSelectedCategory('All')
-                    setPriceRange([0, 2000])
+                    setPriceRange([0, 5000])
                   }}
                   className="w-full bg-gray-100 text-gray-700 py-1.5 lg:py-2 px-3 lg:px-4 rounded-md hover:bg-gray-200 transition-colors text-sm"
                 >

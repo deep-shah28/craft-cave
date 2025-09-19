@@ -2,6 +2,7 @@
 
 import { useState, useCallback, memo } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Heart, ShoppingCart, Eye } from 'lucide-react'
 import { Product, useStore } from '@/lib/store'
 import { motion } from 'framer-motion'
@@ -100,9 +101,12 @@ const ProductCard = memo(({ product }: ProductCardProps) => {
           >
             <Heart className="h-4 w-4" fill={isLiked ? 'currentColor' : 'none'} />
           </button>
-          <button className="p-2 bg-stone-50 text-stone-600 rounded-full hover:bg-stone-100 transition-colors">
+          <Link
+            href={`/products/${product.id}`}
+            className="p-2 bg-stone-50 text-stone-600 rounded-full hover:bg-stone-100 transition-colors"
+          >
             <Eye className="h-4 w-4" />
-          </button>
+          </Link>
         </div>
       </div>
 
