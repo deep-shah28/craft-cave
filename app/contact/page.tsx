@@ -124,9 +124,12 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-stone-900">Phone</h3>
-                    <p className="text-stone-600 mt-1">
+                    <a 
+                      href="tel:+918320535250"
+                      className="text-stone-600 mt-1 hover:text-amber-800 transition-colors cursor-pointer block"
+                    >
                       +91 83205 535250
-                    </p>
+                    </a>
                   </div>
                 </div>
                 
@@ -136,9 +139,12 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-stone-900">Email</h3>
-                    <p className="text-stone-600 mt-1">
-                      hello@craftcave.in
-                    </p>
+                    <a 
+                      href="mailto:craftcavebyjinali@gmail.com"
+                      className="text-stone-600 mt-1 hover:text-amber-800 transition-colors cursor-pointer block"
+                    >
+                      craftcavebyjinali@gmail.com
+                    </a>
                   </div>
                 </div>
               </div>

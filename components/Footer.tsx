@@ -77,7 +77,12 @@ export default function Footer() {
                     </div>
                   </div>
                   <div>
-                    <span className="text-white text-sm font-medium block">+91 83205 35250</span>
+                    <a 
+                      href="tel:+918320535250"
+                      className="text-white text-sm font-medium block hover:text-amber-300 transition-colors cursor-pointer"
+                    >
+                      +91 83205 35250
+                    </a>
                     <span className="text-stone-400 text-xs">Call us anytime</span>
                   </div>
                 </div>
@@ -91,7 +96,12 @@ export default function Footer() {
                     </div>
                   </div>
                   <div>
-                    <span className="text-white text-sm font-medium block">hello@craftcave.in</span>
+                    <a 
+                      href="mailto:craftcavebyjinali@gmail.com"
+                      className="text-white text-sm font-medium block hover:text-amber-300 transition-colors cursor-pointer"
+                    >
+                      craftcavebyjinali@gmail.com
+                    </a>
                     <span className="text-stone-400 text-xs">24/7 support</span>
                   </div>
                 </div>
