@@ -167,9 +167,9 @@ export default function BuildComboPage() {
   return (
     <div className="min-h-screen bg-stone-50 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-stone-900 mb-4">Build Your Own Combo</h1>
-          <p className="text-xl text-stone-700">Create the perfect personalized gift hamper</p>
+        <div className="text-center mb-6 lg:mb-8 px-4">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-stone-900 mb-2 lg:mb-4">Build Your Own Combo</h1>
+          <p className="text-base sm:text-lg lg:text-xl text-stone-700">Create the perfect personalized gift hamper</p>
         </div>
 
         <StepIndicator currentStep={step} />

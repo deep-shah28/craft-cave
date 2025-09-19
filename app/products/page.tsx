@@ -58,11 +58,11 @@ export default function ProductsPage() {
           {/* Sidebar Filters */}
           <div className="lg:w-64 flex-shrink-0">
             <div className="bg-white rounded-lg shadow-sm border p-4 lg:p-6 lg:sticky lg:top-6">
-              <div className="flex items-center justify-between mb-4 lg:mb-6">
-                <h2 className="text-lg font-semibold">Filters</h2>
+              <div className="flex items-center justify-between">
+                <h2 className="text-lg font-semibold text-gray-900 mb-2 lg:mb-3">Filters</h2>
                 <button
                   onClick={() => setShowFilters(!showFilters)}
-                  className="lg:hidden p-2 hover:bg-gray-100 rounded"
+                  className="lg:hidden p-2 hover:bg-gray-100 rounded text-gray-700"
                 >
                   <SlidersHorizontal className="h-5 w-5" />
                 </button>
@@ -71,7 +71,6 @@ export default function ProductsPage() {
               <div className={`space-y-4 lg:space-y-6 ${showFilters || 'hidden lg:block'}`}>
                 {/* Categories */}
                 <div>
-                  <h3 className="text-sm font-medium text-gray-900 mb-2 lg:mb-3">Categories</h3>
                   <div className="space-y-1 lg:space-y-2">
                     {categories.map((category) => (
                       <button
@@ -133,20 +132,20 @@ export default function ProductsPage() {
                 </span>
               </div>
 
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-4 w-full lg:w-auto">
                 {/* Sort */}
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                  className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-amber-500 focus:border-transparent w-full lg:w-auto bg-white text-gray-900 relative z-10"
                 >
-                  <option value="name">Sort by Name</option>
-                  <option value="price-low">Price: Low to High</option>
-                  <option value="price-high">Price: High to Low</option>
+                  <option value="name" className="bg-white text-gray-900">Sort by Name</option>
+                  <option value="price-low" className="bg-white text-gray-900">Price: Low to High</option>
+                  <option value="price-high" className="bg-white text-gray-900">Price: High to Low</option>
                 </select>
 
                 {/* View Mode */}
-                <div className="flex border border-gray-300 rounded-md">
+                <div className="hidden md:flex border border-gray-300 rounded-md">
                   <button
                     onClick={() => setViewMode('grid')}
                     className={`p-2 ${viewMode === 'grid' ? 'bg-amber-100 text-amber-600' : 'text-gray-400'}`}
