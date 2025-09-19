@@ -2,8 +2,8 @@
 
 import { useState, useEffect, useCallback, useMemo } from 'react'
 import { AnimatePresence } from 'framer-motion'
-import { useStore } from '@/lib/store'
-import { useBaskets, useComboItems, Product } from '@/lib/hooks/useProducts'
+import { useStore, Product } from '@/lib/store'
+import { useBaskets, useComboItems } from '@/lib/hooks/useProducts'
 import toast from 'react-hot-toast'
 
 // Import components
@@ -96,7 +96,7 @@ export default function BuildComboPage() {
       return
     }
     
-    // Add to cart using store
+    // Add to cart using store with detailed combo information
     const comboProduct: Product = {
       id: `combo-${Date.now()}`,
       name: `Custom Hamper - ${comboBuilder.selectedBasket.name}`,
@@ -108,7 +108,25 @@ export default function BuildComboPage() {
       productType: 'combo',
       inStock: true,
       size: comboBuilder.selectedBasket.size,
-      comboItems: comboBuilder.selectedItems.map(item => item.id)
+      comboItems: comboBuilder.selectedItems.map(item => item.id),
+      comboDetails: {
+        basket: {
+          id: comboBuilder.selectedBasket.id,
+          name: comboBuilder.selectedBasket.name,
+          price: comboBuilder.selectedBasket.price,
+          image: comboBuilder.selectedBasket.image,
+          size: comboBuilder.selectedBasket.size,
+          capacity: comboBuilder.selectedBasket.capacity
+        },
+        items: comboBuilder.selectedItems.map(item => ({
+          id: item.id,
+          name: item.name,
+          price: item.price,
+          image: item.image,
+          category: item.category
+        })),
+        customizations: comboBuilder.customizations
+      }
     }
     
     addToCart(comboProduct)

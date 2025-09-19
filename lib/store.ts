@@ -20,6 +20,29 @@ export interface Product {
   material?: string
   capacity?: string
   comboItems?: string[] // For pre-made combos
+  // Detailed combo information for custom combos
+  comboDetails?: {
+    basket: {
+      id: string
+      name: string
+      price: number
+      image: string
+      size: string
+      capacity?: string
+    }
+    items: Array<{
+      id: string
+      name: string
+      price: number
+      image: string
+      category: string
+    }>
+    customizations: {
+      giftMessage?: string
+      wrapping?: string
+      ribbon?: string
+    }
+  }
 }
 
 export interface ComboBuilder {
@@ -269,7 +292,25 @@ export const useStore = create<Store>((set, get) => ({
       productType: 'combo',
       inStock: true,
       size: combo.selectedBasket.size,
-      comboItems: combo.selectedItems.map(item => item.id)
+      comboItems: combo.selectedItems.map(item => item.id),
+      comboDetails: {
+        basket: {
+          id: combo.selectedBasket.id,
+          name: combo.selectedBasket.name,
+          price: combo.selectedBasket.price,
+          image: combo.selectedBasket.image,
+          size: combo.selectedBasket.size,
+          capacity: combo.selectedBasket.capacity
+        },
+        items: combo.selectedItems.map(item => ({
+          id: item.id,
+          name: item.name,
+          price: item.price,
+          image: item.image,
+          category: item.category
+        })),
+        customizations: combo.customizations
+      }
     }
 
     await get().addToCart(comboProduct)

@@ -6,6 +6,7 @@ import { useStore } from '@/lib/store'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
+import emailjs from '@emailjs/browser'
 
 export default function CheckoutPage() {
   const [mounted, setMounted] = useState(false)
@@ -27,7 +28,6 @@ export default function CheckoutPage() {
     landmark: '',
     
     // Payment & Delivery
-    paymentMethod: 'razorpay',
     shippingMethod: 'standard',
     
     // Special Instructions
@@ -67,6 +67,109 @@ export default function CheckoutPage() {
     }))
   }
 
+  const sendOrderEmails = async () => {
+    try {
+      // Format cart items for email with detailed combo information
+      const cartItems = cart.map(item => {
+        if (item.productType === 'combo' && item.comboDetails) {
+          // Format detailed combo information
+          const combo = item.comboDetails
+          let comboText = `• ${item.name} (Qty: ${item.quantity}) - ₹${(item.price * item.quantity).toLocaleString()}\n`
+          
+          // Add basket details
+          comboText += `  🧺 Basket: ${combo.basket.name} (${combo.basket.size}) - ₹${combo.basket.price.toLocaleString()}\n`
+          
+          // Add items details
+          comboText += `  📦 Items (${combo.items.length}):\n`
+          combo.items.forEach(comboItem => {
+            comboText += `    - ${comboItem.name} (${comboItem.category}) - ₹${comboItem.price.toLocaleString()}\n`
+          })
+          
+          // Add customizations if any
+          if (combo.customizations.giftMessage || combo.customizations.wrapping || combo.customizations.ribbon) {
+            comboText += `  🎁 Customizations:\n`
+            if (combo.customizations.giftMessage) {
+              comboText += `    - Gift Message: ${combo.customizations.giftMessage}\n`
+            }
+            if (combo.customizations.wrapping) {
+              comboText += `    - Wrapping: ${combo.customizations.wrapping}\n`
+            }
+            if (combo.customizations.ribbon) {
+              comboText += `    - Ribbon: ${combo.customizations.ribbon}\n`
+            }
+          }
+          
+          return comboText.trim()
+        } else {
+          // Regular item formatting
+          return `• ${item.name} (Qty: ${item.quantity}) - ₹${(item.price * item.quantity).toLocaleString()}`
+        }
+      }).join('\n\n')
+
+      // Initialize EmailJS
+      emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!)
+
+      // Common template parameters
+      const baseParams = {
+        customer_name: `${formData.firstName} ${formData.lastName}`,
+        customer_email: formData.email,
+        customer_phone: formData.phone,
+        shipping_address: `${formData.address}, ${formData.city}, ${formData.state} - ${formData.pincode}`,
+        landmark: formData.landmark || 'Not provided',
+        shipping_method: formData.shippingMethod === 'standard' ? 'Standard Delivery (3-5 days)' : 'Store Pickup (2-3 hours)',
+        gift_message: formData.giftMessage || 'No gift message',
+        special_instructions: formData.specialInstructions || 'None',
+        cart_items: cartItems,
+        subtotal: `₹${total.toLocaleString()}`,
+        shipping_cost: shippingCost === 0 ? 'FREE' : `₹${shippingCost}`,
+        final_total: `₹${finalTotal.toLocaleString()}`,
+        order_date: new Date().toLocaleString('en-IN', { 
+          timeZone: 'Asia/Kolkata',
+          year: 'numeric',
+          month: 'long', 
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        })
+      }
+
+      // 1. Send business notification email
+      const businessParams = {
+        ...baseParams,
+        to_name: 'Craft Cave Team',
+        to_email: 'craftcavebyjinali@gmail.com',
+        from_name: `${formData.firstName} ${formData.lastName}`,
+      }
+
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        businessParams
+      )
+
+      // 2. Send customer confirmation email
+      const customerParams = {
+        ...baseParams,
+        to_name: `${formData.firstName} ${formData.lastName}`,
+        to_email: formData.email,
+        from_name: 'Craft Cave Team',
+      }
+
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_CUSTOMER_TEMPLATE_ID!,
+        customerParams
+      )
+      
+      console.log(`✅ Business notification sent to craftcavebyjinali@gmail.com`)
+      console.log(`✅ Customer confirmation sent to ${formData.email}`)
+      
+    } catch (error) {
+      console.error('Failed to send order emails:', error)
+      // Don't block the order if email fails
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
@@ -91,13 +194,16 @@ export default function CheckoutPage() {
       return
     }
 
-    toast.success('Order placed successfully! Redirecting to payment...')
+    toast.success('Order placed successfully! Sending order details...')
     
-    // Simulate order processing
+    // Send order email automatically
+    await sendOrderEmails()
+    
+    // Process order
     setTimeout(() => {
       clearCart()
       router.push('/order-confirmation')
-    }, 2000)
+    }, 500)
   }
 
   return (

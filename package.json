@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@heroicons/react": "^2.1.1",
     "@tanstack/react-query": "^5.89.0",
     "framer-motion": "^12.0.0",
