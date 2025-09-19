@@ -4,7 +4,7 @@ import { Instagram, Mail, Phone, MapPin } from 'lucide-react'
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-br from-stone-900 via-stone-800 to-amber-900 text-white relative overflow-hidden">
+    <footer className=" from-stone-900 via-stone-800 to-amber-900 text-white relative overflow-hidden">
       {/* Modern geometric background pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-0 left-0 w-96 h-96 bg-amber-400 rounded-full mix-blend-multiply filter blur-xl transform -translate-x-48 -translate-y-48"></div>
