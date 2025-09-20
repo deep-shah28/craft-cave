@@ -21,9 +21,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Craft Cave - Premium Handcrafted Candles | Made in India",
-  description: "Discover our exclusive collection of handcrafted candles. Premium quality, natural fragrances, and beautiful designs. Free shipping across India on orders above ₹999.",
-  keywords: "candles, handcrafted, premium, India, aromatherapy, home fragrance, natural wax, soy candles, scented candles",
+  title: "Craft Cave - Handmade Gifts & Decor | Made in India",
+  description: "Discover handcrafted gifts and decor: hampers, wall hangings, scrapbooks, portraits, candles, handmade cards, and diyas. Premium quality, made in India. Free shipping across India on orders above ₹999.",
+  keywords: "handmade gifts, gift hampers, wall hangings, scrapbooks, portraits, candles, handmade cards, diyas, home decor, Indian crafts, personalized gifts, premium, India",
   authors: [{ name: "Craft Cave" }],
   creator: "Craft Cave",
   publisher: "Craft Cave",
@@ -37,21 +37,21 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://craft-cave.vercel.app',
     siteName: 'Craft Cave',
-    title: 'Craft Cave - Premium Handcrafted Candles',
-    description: 'Discover our exclusive collection of handcrafted candles made in India',
+    title: 'Craft Cave - Handmade Gifts & Decor',
+    description: 'Discover handcrafted gifts and decor: hampers, wall hangings, scrapbooks, portraits, candles, handmade cards, and diyas — made in India.',
     images: [
       {
         url: '/images/logo.png',
         width: 1200,
         height: 630,
-        alt: 'Craft Cave - Premium Handcrafted Candles',
+        alt: 'Craft Cave - Handmade Gifts & Decor',
       }
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Craft Cave - Premium Handcrafted Candles',
-    description: 'Discover our exclusive collection of handcrafted candles made in India',
+    title: 'Craft Cave - Handmade Gifts & Decor',
+    description: 'Discover handcrafted gifts and decor: hampers, wall hangings, scrapbooks, portraits, candles, handmade cards, and diyas — made in India.',
     images: ['/images/logo.png'],
   },
 };

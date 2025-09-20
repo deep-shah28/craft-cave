@@ -44,7 +44,7 @@ export default function Home() {
               <div className="flex items-center justify-center lg:justify-start mb-4">
                 <Flame className="h-8 w-8 text-amber-800 mr-2" />
                 <span className="text-sm font-semibold text-amber-800 uppercase tracking-wide">
-                  Premium Handcrafted Candles
+                  Premium Handmade Gifts & Decor
                 </span>
               </div>
               
@@ -54,7 +54,7 @@ export default function Home() {
               </h1>
               
               <p className="text-lg text-stone-600 mb-8 max-w-xl mx-auto lg:mx-0">
-                Discover our exclusive collection of handcrafted candles made with premium natural wax and authentic fragrances. Transform your home into a sanctuary of peace and tranquility.
+                Explore our handcrafted gifts and decor — hampers, wall hangings, scrapbooks, portraits, candles, handmade cards, and diyas — made with love in India. Thoughtful pieces to celebrate every occasion and elevate your space.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -94,7 +94,7 @@ export default function Home() {
               <div className="relative z-10 bg-white rounded-2xl shadow-2xl p-8">
                 <Image
                   src="https://images.unsplash.com/photo-1602874801006-47670818b8ee?w=500&h=400&fit=crop"
-                  alt="Beautiful handcrafted candles"
+                  alt="Beautiful handcrafted gifts and decor"
                   width={500}
                   height={400}
                   className="rounded-xl object-cover w-full h-80"
@@ -126,7 +126,7 @@ export default function Home() {
                 <Shield className="h-8 w-8 text-amber-800" />
               </div>
               <h3 className="text-lg font-semibold mb-2 text-stone-900">Premium Quality</h3>
-              <p className="text-stone-600 text-sm">100% natural wax with authentic fragrances</p>
+              <p className="text-stone-600 text-sm">Premium materials and authentic craftsmanship</p>
             </div>
             
             <div className="text-center">
@@ -142,7 +142,7 @@ export default function Home() {
                 <Flame className="h-8 w-8 text-amber-800" />
               </div>
               <h3 className="text-lg font-semibold mb-2 text-stone-900">Handcrafted</h3>
-              <p className="text-stone-600 text-sm">Each candle is carefully crafted by skilled artisans</p>
+              <p className="text-stone-600 text-sm">Each product is carefully crafted by skilled artisans</p>
             </div>
           </div>
         </div>
@@ -156,7 +156,7 @@ export default function Home() {
               Featured Products
             </h2>
             <p className="text-lg text-stone-600 max-w-2xl mx-auto">
-              Discover our most loved candles that bring warmth and fragrance to thousands of homes across India
+              Discover our most loved gifts and decor that bring joy and warmth to thousands of homes across India
             </p>
           </div>
           
