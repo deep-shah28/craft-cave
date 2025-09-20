@@ -49,8 +49,8 @@ export default function Home() {
               </div>
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-stone-900 mb-6 leading-tight">
-                Illuminate Your Space with 
-                <span className="text-amber-800"> Natural Beauty</span>
+                Handmade Gifts & Decor 
+                <span className="text-amber-800">Made in India</span>
               </h1>
               
               <p className="text-lg text-stone-600 mb-8 max-w-xl mx-auto lg:mx-0">

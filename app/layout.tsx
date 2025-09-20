@@ -8,6 +8,7 @@ import LikesModal from '@/components/LikesModal';
 import { QueryProvider } from '@/lib/query-client';
 import { CartProvider } from '@/components/CartProvider';
 import StructuredData from '@/components/StructuredData';
+import GoogleAnalytics from '@/components/GoogleAnalytics';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -23,11 +24,17 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Craft Cave - Handmade Gifts & Decor | Made in India",
   description: "Discover handcrafted gifts and decor: hampers, wall hangings, scrapbooks, portraits, candles, handmade cards, and diyas. Premium quality, made in India. Free shipping across India on orders above ₹999.",
-  keywords: "handmade gifts, gift hampers, wall hangings, scrapbooks, portraits, candles, handmade cards, diyas, home decor, Indian crafts, personalized gifts, premium, India",
+  keywords: "handmade gifts, gift hampers, wall hangings, scrapbooks, portraits, candles, handmade cards, diyas, home decor, Indian crafts, personalized gifts, premium, India, artisan gifts, handcrafted home decor, made in India gifts, unique gifts, custom gifts, traditional crafts, wedding gifts, festival gifts, diwali gifts, birthday gifts, anniversary gifts, housewarming gifts",
   authors: [{ name: "Craft Cave" }],
   creator: "Craft Cave",
   publisher: "Craft Cave",
   robots: "index, follow",
+  verification: {
+    google: "6jcHv7UW7om6WuvXGsV9kNRkVfW7WJ7Q9i3mc51jAww"
+  },
+  alternates: {
+    canonical: 'https://craft-cave.vercel.app'
+  },
   icons: {
     icon: '/images/logo.png',
     apple: '/images/logo.png',
@@ -41,7 +48,7 @@ export const metadata: Metadata = {
     description: 'Discover handcrafted gifts and decor: hampers, wall hangings, scrapbooks, portraits, candles, handmade cards, and diyas — made in India.',
     images: [
       {
-        url: '/images/logo.png',
+        url: 'https://craft-cave.vercel.app/images/logo.png',
         width: 1200,
         height: 630,
         alt: 'Craft Cave - Handmade Gifts & Decor',
@@ -52,7 +59,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Craft Cave - Handmade Gifts & Decor',
     description: 'Discover handcrafted gifts and decor: hampers, wall hangings, scrapbooks, portraits, candles, handmade cards, and diyas — made in India.',
-    images: ['/images/logo.png'],
+    images: ['https://craft-cave.vercel.app/images/logo.png'],
   },
 };
 
@@ -75,6 +82,11 @@ export default function RootLayout({
           type="organization" 
           data={{ url: baseUrl }} 
         />
+        <StructuredData 
+          type="localbusiness" 
+          data={{ url: baseUrl }} 
+        />
+        <GoogleAnalytics />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

@@ -1,12 +1,15 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Filter, Grid, List, SlidersHorizontal } from 'lucide-react'
 import ProductCard from '@/components/ProductCard'
 import { sampleProducts, categories } from '@/lib/data'
 
 export default function ProductsPage() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
   const [mounted, setMounted] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [sortBy, setSortBy] = useState('name')
@@ -16,7 +19,12 @@ export default function ProductsPage() {
 
   useEffect(() => {
     setMounted(true)
-  }, [])
+    // Get category from URL params if available
+    const categoryFromUrl = searchParams.get('category')
+    if (categoryFromUrl && categories.includes(categoryFromUrl)) {
+      setSelectedCategory(categoryFromUrl)
+    }
+  }, [searchParams])
 
   if (!mounted) {
     return null
@@ -75,7 +83,17 @@ export default function ProductsPage() {
                     {categories.map((category) => (
                       <button
                         key={category}
-                        onClick={() => setSelectedCategory(category)}
+                        onClick={() => {
+                          setSelectedCategory(category)
+                          // Update URL with selected category
+                          const params = new URLSearchParams(searchParams.toString())
+                          if (category === 'All') {
+                            params.delete('category')
+                          } else {
+                            params.set('category', category)
+                          }
+                          router.push(`/products?${params.toString()}`)
+                        }}
                         className={`block w-full text-left px-2 py-1.5 lg:px-3 lg:py-2 text-sm rounded-md transition-colors ${
                           selectedCategory === category
                             ? 'bg-amber-100 text-amber-800'
@@ -113,6 +131,8 @@ export default function ProductsPage() {
                   onClick={() => {
                     setSelectedCategory('All')
                     setPriceRange([0, 5000])
+                    // Clear URL params
+                    router.push('/products')
                   }}
                   className="w-full bg-gray-100 text-gray-700 py-1.5 lg:py-2 px-3 lg:px-4 rounded-md hover:bg-gray-200 transition-colors text-sm"
                 >

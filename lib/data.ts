@@ -94,6 +94,84 @@ export const sampleProducts: Product[] = [
     burnTime: '42-48 hours',
     size: '320g'
   },
+  {
+    id: '7',
+    name: 'Premium Scented Candle Collection',
+    price: 1299,
+    originalPrice: 1699,
+    image: 'https://res.cloudinary.com/dqgprx49p/image/upload/v1758385357/572be8b3-36f5-46f2-9f12-6c06a2db73a1_hhyqyi.jpg',
+    images: [
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758385357/572be8b3-36f5-46f2-9f12-6c06a2db73a1_hhyqyi.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758385357/e1e818c3-7348-47c9-a84a-3fefed86d52d_sjdfae.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758385357/a0cce0a1-3507-437d-b34f-4911fa661aa7_vg2ceg.jpg'
+    ],
+    description: 'Luxurious scented candle with a rich, complex fragrance profile. Hand-poured with premium soy wax for a clean, long-lasting burn.',
+    category: 'Scented Candles',
+    productType: 'candle',
+    inStock: true,
+    fragrance: 'Signature Blend',
+    burnTime: '45-50 hours',
+    size: ''
+  },
+  {
+    id: '8',
+    name: 'Artisan Scented Candle',
+    price: 1149,
+    originalPrice: 1549,
+    image: 'https://res.cloudinary.com/dqgprx49p/image/upload/v1758386324/435eeeab-2863-4ee9-bb95-e335faf7ca65_zp7ilf.jpg',
+    images: [
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758386324/435eeeab-2863-4ee9-bb95-e335faf7ca65_zp7ilf.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758386321/337a5b16-80a4-4452-bc05-df7d6637ddd5_mvqr6d.jpg'
+    ],
+    videos: ['https://res.cloudinary.com/dqgprx49p/video/upload/v1758386846/_MConverter.eu_c812e8df-8af0-45f7-b8f4-ad855edf2f88_iknwsl.mp4'],
+    description: 'Handcrafted artisan candle with an exquisite fragrance blend. Each candle is carefully poured and finished with attention to detail.',
+    category: 'Scented Candles',
+    productType: 'candle',
+    inStock: true,
+    fragrance: 'Artisan Blend',
+    burnTime: '40-45 hours',
+    size: '300g'
+  },
+  {
+    id: '9',
+    name: 'Premium Luxury Candle',
+    price: 1399,
+    originalPrice: 1899,
+    image: 'https://res.cloudinary.com/dqgprx49p/image/upload/v1758387109/b16463a8-f5a7-488b-a4b0-43aead47460d_rx1bvd.jpg',
+    images: [
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758387109/b16463a8-f5a7-488b-a4b0-43aead47460d_rx1bvd.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758387469/55c3bf5d-bc6a-4975-b57a-adfba6812997_clrqxn.jpg'
+    ],
+    videos: ['https://res.cloudinary.com/dqgprx49p/video/upload/v1758387205/_MConverter.eu_2e97c5aa-f523-4b64-8156-4d069ff6e8c8_wvjtqx.mp4'],
+    description: 'Premium luxury candle featuring an elegant design and sophisticated fragrance. Perfect for creating an upscale ambiance in any space.',
+    category: 'Scented Candles',
+    productType: 'candle',
+    inStock: true,
+    fragrance: 'Luxury Blend',
+    burnTime: '48-52 hours',
+    size: '400g'
+  },
+  {
+    id: '10',
+    name: 'Elegant Scented Candle',
+    price: 1249,
+    originalPrice: 1649,
+    image: 'https://res.cloudinary.com/dqgprx49p/image/upload/v1758387814/94d6b6ce-e6e7-4243-86e8-8b3ebf338694_azjx5x.jpg',
+    images: [
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758387814/94d6b6ce-e6e7-4243-86e8-8b3ebf338694_azjx5x.jpg'
+    ],
+    videos: [
+      'https://res.cloudinary.com/dqgprx49p/video/upload/v1758388139/86d43687-a7b0-43c5-973b-f8e26034ec6f_ywfl2o.mp4',
+      'https://res.cloudinary.com/dqgprx49p/video/upload/v1758388251/1d826db1-475e-4852-b6ad-9d9a0b45219a_mlj9ct.mp4'
+    ],
+    description: 'Elegant scented candle with a refined fragrance and beautiful presentation. Crafted for those who appreciate sophisticated home décor.',
+    category: 'Scented Candles',
+    productType: 'candle',
+    inStock: true,
+    fragrance: 'Elegant Blend',
+    burnTime: '44-48 hours',
+    size: '320g'
+  },
 
   // Baskets
   {
@@ -269,6 +347,7 @@ export const categories = [
   'Home Fragrance',
   'Floral',
   'Energizing',
+  'Scented Candles',
   'Hampers',
   'Baskets',
   'Accessories'
