@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { ArrowLeft, Star, Plus, Minus, ShoppingCart, Heart, Share, Play } from 'lucide-react'
 import { useStore } from '@/lib/store'
 import { sampleProducts } from '@/lib/data'
+import HoverVideo from '@/components/HoverVideo'
 import toast from 'react-hot-toast'
 
 export default function ProductDetailPage() {
@@ -16,7 +17,6 @@ export default function ProductDetailPage() {
   const [mounted, setMounted] = useState(false)
   const [quantity, setQuantity] = useState(1)
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
 
   useEffect(() => {
     setMounted(true)
@@ -94,24 +94,12 @@ export default function ProductDetailPage() {
             {/* Main Media Display */}
             <div className="relative aspect-square bg-stone-100 rounded-lg overflow-hidden">
               {mediaItems[selectedImageIndex]?.type === 'video' ? (
-                <div className="relative w-full h-full">
-                  <video
-                    src={mediaItems[selectedImageIndex].src}
-                    className="w-full h-full object-cover"
-                    controls={isVideoPlaying}
-                    poster={product.image}
-                  />
-                  {!isVideoPlaying && (
-                    <button
-                      onClick={() => setIsVideoPlaying(true)}
-                      className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors"
-                    >
-                      <div className="bg-white/90 rounded-full p-4 hover:bg-white transition-colors">
-                        <Play className="h-8 w-8 text-stone-900" />
-                      </div>
-                    </button>
-                  )}
-                </div>
+                <HoverVideo
+                  src={mediaItems[selectedImageIndex].src}
+                  poster={product.image}
+                  alt={mediaItems[selectedImageIndex].alt}
+                  className="w-full h-full"
+                />
               ) : (
                 <Image
                   src={mediaItems[selectedImageIndex]?.src || product.image}
@@ -128,10 +116,7 @@ export default function ProductDetailPage() {
                 {mediaItems.map((media, index) => (
                   <button
                     key={index}
-                    onClick={() => {
-                      setSelectedImageIndex(index)
-                      setIsVideoPlaying(false)
-                    }}
+                    onClick={() => setSelectedImageIndex(index)}
                     className={`relative flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-colors ${
                       selectedImageIndex === index ? 'border-amber-800' : 'border-stone-200'
                     }`}

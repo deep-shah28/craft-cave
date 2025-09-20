@@ -1,6 +1,69 @@
+'use client'
+
+import { useState } from 'react'
 import { Mail, Phone, MapPin, Clock, Send } from 'lucide-react'
+import toast from 'react-hot-toast'
+import emailjs from '@emailjs/browser'
 
 export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    subject: '',
+    message: ''
+  })
+  
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    try {
+      // Initialize EmailJS
+      emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!)
+
+      // Send email using EmailJS
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_CUSTOMER_TEMPLATE_ID!,
+        {
+          customer_name: `${formData.firstName} ${formData.lastName}`,
+          customer_email: formData.email,
+          customer_phone: formData.phone || 'Not provided',
+          subject: formData.subject,
+          message: formData.message,
+          to_email: 'craftcavebyjinali@gmail.com'
+        }
+      )
+
+      toast.success('Message sent successfully! We\'ll get back to you soon.')
+      
+      // Reset form
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: ''
+      })
+    } catch (error) {
+      console.error('Failed to send message:', error)
+      toast.error('Failed to send message. Please try again or contact us directly.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
   return (
     <div className="min-h-screen bg-stone-50">
       {/* Page Header */}
@@ -17,7 +80,7 @@ export default function ContactPage() {
           <div className="bg-stone-50 rounded-lg shadow-sm border border-stone-200 p-8">
             <h2 className="text-2xl font-bold text-stone-900 mb-6">Send us a Message</h2>
             
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="firstName" className="block text-sm font-medium text-stone-700 mb-2">
@@ -26,6 +89,9 @@ export default function ContactPage() {
                   <input
                     type="text"
                     id="firstName"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleInputChange}
                     className="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-amber-800 focus:border-transparent text-stone-900 bg-white"
                     required
                   />
@@ -37,6 +103,9 @@ export default function ContactPage() {
                   <input
                     type="text"
                     id="lastName"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleInputChange}
                     className="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-amber-800 focus:border-transparent text-stone-900 bg-white"
                     required
                   />
@@ -50,6 +119,9 @@ export default function ContactPage() {
                 <input
                   type="email"
                   id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
                   className="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-amber-800 focus:border-transparent text-stone-900 bg-white"
                   required
                 />
@@ -62,6 +134,9 @@ export default function ContactPage() {
                 <input
                   type="tel"
                   id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
                   className="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-amber-800 focus:border-transparent text-stone-900 bg-white placeholder-stone-500"
                   placeholder="+91 98765 43210"
                 />
@@ -73,6 +148,9 @@ export default function ContactPage() {
                 </label>
                 <select
                   id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleInputChange}
                   className="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-amber-800 focus:border-transparent text-stone-900 bg-white"
                   required
                 >
@@ -91,6 +169,9 @@ export default function ContactPage() {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
                   rows={5}
                   className="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-amber-800 focus:border-transparent text-stone-900 bg-white placeholder-stone-500"
                   placeholder="Tell us how we can help you..."
@@ -100,10 +181,11 @@ export default function ContactPage() {
               
               <button
                 type="submit"
-                className="w-full bg-amber-800 text-white py-3 px-6 rounded-lg hover:bg-amber-900 transition-colors font-medium flex items-center justify-center space-x-2"
+                disabled={isSubmitting}
+                className="w-full bg-amber-800 text-white py-3 px-6 rounded-lg hover:bg-amber-900 disabled:bg-amber-600 disabled:cursor-not-allowed transition-colors font-medium flex items-center justify-center space-x-2"
               >
-                <Send className="h-5 w-5" />
-                <span>Send Message</span>
+                <Send className={`h-5 w-5 ${isSubmitting ? 'animate-pulse' : ''}`} />
+                <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
               </button>
             </form>
           </div>

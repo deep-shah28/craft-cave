@@ -9,6 +9,7 @@ export const sampleProducts: Product[] = [
     originalPrice: 1299,
     image: 'https://images.unsplash.com/photo-1602874801006-47670818b8ee?w=400&h=400&fit=crop',
     images: ['https://images.unsplash.com/photo-1602874801006-47670818b8ee?w=400&h=400&fit=crop'],
+    videos: ['https://player.vimeo.com/progressive_redirect/playback/927016456/rendition/720p/file.mp4?loc=external&oauth2_token_id=1747418641&signature=c8df2ba2d727f8f9b9864afc7b6871c67e2ad391395d02dc814ad10fcc5f1445'],
     description: 'A calming lavender-scented candle perfect for relaxation and meditation. Made with premium soy wax and natural lavender essential oils.',
     category: 'Aromatherapy',
     productType: 'candle',
@@ -39,6 +40,7 @@ export const sampleProducts: Product[] = [
     originalPrice: 1399,
     image: 'https://images.unsplash.com/photo-1603006905003-be475563bc59?w=400&h=400&fit=crop',
     images: ['https://images.unsplash.com/photo-1603006905003-be475563bc59?w=400&h=400&fit=crop'],
+    videos: ['https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'],
     description: 'Exotic jasmine fragrance that transforms your space into a tranquil garden. Hand-poured with love in small batches.',
     category: 'Floral',
     productType: 'candle',
@@ -217,8 +219,12 @@ export const sampleProducts: Product[] = [
     name: 'Relaxation Hamper',
     price: 2499,
     originalPrice: 3299,
-    image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=400&h=400&fit=crop',
-    images: ['https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=400&h=400&fit=crop'],
+    image: 'https://res.cloudinary.com/dqgprx49p/image/upload/v1758361113/IMG_2703_gh2ssv.jpg',
+    images: [
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758361113/IMG_2703_gh2ssv.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758361124/IMG_2704_os4lq0.jpg'
+    ],
+    videos: ['https://res.cloudinary.com/dqgprx49p/video/upload/v1758363884/025f55bd-4839-4b55-8f13-0d630740b2ac_gpwbm8.mp4'],
     description: 'Complete relaxation package with lavender candle, potpourri, tea lights, and bamboo basket.',
     category: 'Hampers',
     productType: 'hamper',
@@ -245,7 +251,7 @@ export const sampleProducts: Product[] = [
     name: 'Craft Cave Special Hamper',
     price: 2999,
     originalPrice: 3999,
-    image: '/images/hamper1.jpeg',
+    image: 'https://res.cloudinary.com/dqgprx49p/image/upload/v1758350556/hamper1_iuussi.jpg',
     images: ['/images/hamper1.jpeg'],
     description: 'Our signature hamper featuring a curated selection of premium candles and accessories. Perfect for gifting or treating yourself.',
     category: 'Hampers',
@@ -258,7 +264,7 @@ export const sampleProducts: Product[] = [
 
 export const categories = [
   'All',
-  'Aromatherapy', 
+  'Aromatherapy',
   'Home Fragrance',
   'Floral',
   'Energizing',
