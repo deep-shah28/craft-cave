@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { sampleProducts } from '@/lib/data'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://your-vercel-domain.vercel.app' // Replace with your actual Vercel domain
+  const baseUrl = 'https://craft-cave.vercel.app'
   
   // Static pages
   const staticPages = [

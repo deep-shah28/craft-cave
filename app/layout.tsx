@@ -40,10 +40,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const baseUrl = 'https://your-vercel-domain.vercel.app' // Replace with your actual Vercel domain
+  const baseUrl = 'https://craft-cave.vercel.app'
   
   return (
-    <html lang="en" suppressHydrationWarnings>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <StructuredData 
           type="website" 
@@ -56,7 +56,7 @@ export default function RootLayout({
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        suppressHydrationWarnings
+        suppressHydrationWarning
       >
         <QueryProvider>
           <CartProvider>

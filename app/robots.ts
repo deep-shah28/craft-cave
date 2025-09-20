@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = 'https://your-vercel-domain.vercel.app' // Replace with your actual Vercel domain
+  const baseUrl = 'https://craft-cave.vercel.app'
   
   return {
     rules: {
