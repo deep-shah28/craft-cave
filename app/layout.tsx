@@ -45,6 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <meta name="google-site-verification" content="6jcHv7UW7om6WuvXGsV9kNRkVfW7WJ7Q9i3mc51jAww" />
         <StructuredData 
           type="website" 
           data={{ url: baseUrl }} 
