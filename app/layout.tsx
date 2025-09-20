@@ -23,12 +23,33 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Craft Cave - Premium Handcrafted Candles | Made in India",
   description: "Discover our exclusive collection of handcrafted candles. Premium quality, natural fragrances, and beautiful designs. Free shipping across India on orders above ₹999.",
-  keywords: "candles, handcrafted, premium, India, aromatherapy, home fragrance, natural wax",
+  keywords: "candles, handcrafted, premium, India, aromatherapy, home fragrance, natural wax, soy candles, scented candles",
+  authors: [{ name: "Craft Cave" }],
+  creator: "Craft Cave",
+  publisher: "Craft Cave",
+  robots: "index, follow",
   icons: {
     icon: '/images/logo.png',
     apple: '/images/logo.png',
   },
   openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://craft-cave.vercel.app',
+    siteName: 'Craft Cave',
+    title: 'Craft Cave - Premium Handcrafted Candles',
+    description: 'Discover our exclusive collection of handcrafted candles made in India',
+    images: [
+      {
+        url: '/images/logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'Craft Cave - Premium Handcrafted Candles',
+      }
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
     title: 'Craft Cave - Premium Handcrafted Candles',
     description: 'Discover our exclusive collection of handcrafted candles made in India',
     images: ['/images/logo.png'],
