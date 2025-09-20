@@ -17,7 +17,10 @@ const ProductCard = memo(({ product }: ProductCardProps) => {
   const { addToCart, toggleLike, isLiked: checkIsLiked, isLikesLoading } = useStore()
   const isLiked = checkIsLiked(product.id)
 
-  const handleAddToCart = useCallback(async () => {
+  const handleAddToCart = useCallback(async (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    
     if (isAddingToCart) return
     
     setIsAddingToCart(true)
@@ -37,7 +40,10 @@ const ProductCard = memo(({ product }: ProductCardProps) => {
     }
   }, [addToCart, product, isAddingToCart])
 
-  const handleLikeToggle = useCallback(async () => {
+  const handleLikeToggle = useCallback(async (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    
     try {
       await toggleLike(product.id)
       toast.success(isLiked ? 'Removed from likes' : 'Added to likes!', {
@@ -57,12 +63,13 @@ const ProductCard = memo(({ product }: ProductCardProps) => {
     : 0
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      className="group relative bg-stone-50 rounded-xl shadow-sm border border-stone-200 overflow-hidden hover:shadow-lg transition-all duration-300"
-    >
+    <Link href={`/products/${product.id}`} className="block">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="group relative bg-stone-50 rounded-xl shadow-sm border border-stone-200 overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer"
+      >
       {/* Image Container */}
       <div className="relative aspect-square overflow-hidden">
         <Image
@@ -101,12 +108,6 @@ const ProductCard = memo(({ product }: ProductCardProps) => {
           >
             <Heart className="h-4 w-4" fill={isLiked ? 'currentColor' : 'none'} />
           </button>
-          <Link
-            href={`/products/${product.id}`}
-            className="p-2 bg-stone-50 text-stone-600 rounded-full hover:bg-stone-100 transition-colors"
-          >
-            <Eye className="h-4 w-4" />
-          </Link>
         </div>
       </div>
 
@@ -167,7 +168,8 @@ const ProductCard = memo(({ product }: ProductCardProps) => {
           </span>
         </button>
       </div>
-    </motion.div>
+      </motion.div>
+    </Link>
   )
 })
 
