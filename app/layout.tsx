@@ -7,6 +7,7 @@ import Cart from '@/components/Cart';
 import LikesModal from '@/components/LikesModal';
 import { QueryProvider } from '@/lib/query-client';
 import { CartProvider } from '@/components/CartProvider';
+import StructuredData from '@/components/StructuredData';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -39,11 +40,23 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const baseUrl = 'https://your-vercel-domain.vercel.app' // Replace with your actual Vercel domain
+  
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarnings>
+      <head>
+        <StructuredData 
+          type="website" 
+          data={{ url: baseUrl }} 
+        />
+        <StructuredData 
+          type="organization" 
+          data={{ url: baseUrl }} 
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        suppressHydrationWarning
+        suppressHydrationWarnings
       >
         <QueryProvider>
           <CartProvider>
