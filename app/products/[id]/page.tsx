@@ -19,6 +19,11 @@ export default function ProductDetailPage() {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
   const [selectedSizeIndex, setSelectedSizeIndex] = useState(0)
   const [selectedDecorations, setSelectedDecorations] = useState<string[]>([])
+  
+  // Touch/swipe state
+  const [touchStart, setTouchStart] = useState<number | null>(null)
+  const [touchEnd, setTouchEnd] = useState<number | null>(null)
+  const [isSwipeTransition, setIsSwipeTransition] = useState(false)
 
   useEffect(() => {
     setMounted(true)
@@ -83,6 +88,37 @@ export default function ProductDetailPage() {
     )
   }
 
+  // Swipe detection functions
+  const minSwipeDistance = 50
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null) // otherwise the swipe is fired even with usual touch events
+    setTouchStart(e.targetTouches[0].clientX)
+  }
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX)
+  }
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return
+    
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > minSwipeDistance
+    const isRightSwipe = distance < -minSwipeDistance
+
+    if (isLeftSwipe && selectedImageIndex < mediaItems.length - 1) {
+      setIsSwipeTransition(true)
+      setSelectedImageIndex(selectedImageIndex + 1)
+      setTimeout(() => setIsSwipeTransition(false), 300)
+    }
+    if (isRightSwipe && selectedImageIndex > 0) {
+      setIsSwipeTransition(true)
+      setSelectedImageIndex(selectedImageIndex - 1)
+      setTimeout(() => setIsSwipeTransition(false), 300)
+    }
+  }
+
   const handleAddToCart = () => {
     const currentPrice = getCurrentPrice()
     const productVariant = {
@@ -121,7 +157,7 @@ export default function ProductDetailPage() {
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <button
-            onClick={() => router.back()}
+            onClick={() => router.push('/products')}
             className="flex items-center space-x-2 text-stone-600 hover:text-stone-900 transition-colors"
           >
             <ArrowLeft className="h-5 w-5" />
@@ -135,21 +171,50 @@ export default function ProductDetailPage() {
           {/* Media Gallery */}
           <div className="space-y-4">
             {/* Main Media Display */}
-            <div className="relative aspect-square bg-stone-100 rounded-lg overflow-hidden">
+            <div 
+              className="relative aspect-square bg-stone-100 rounded-lg overflow-hidden touch-pan-y"
+              onTouchStart={onTouchStart}
+              onTouchMove={onTouchMove}
+              onTouchEnd={onTouchEnd}
+            >
               {mediaItems[selectedImageIndex]?.type === 'video' ? (
                 <HoverVideo
                   src={mediaItems[selectedImageIndex].src}
                   poster={product.image}
                   alt={mediaItems[selectedImageIndex].alt}
-                  className="w-full h-full"
+                  className={`w-full h-full transition-opacity duration-300 ${isSwipeTransition ? 'opacity-75' : 'opacity-100'}`}
                 />
               ) : (
                 <Image
                   src={mediaItems[selectedImageIndex]?.src || product.image}
                   alt={mediaItems[selectedImageIndex]?.alt || product.name}
                   fill
-                  className="object-cover hover:scale-105 transition-transform duration-500"
+                  className={`object-cover hover:scale-105 transition-all duration-300 ${isSwipeTransition ? 'opacity-75 scale-95' : 'opacity-100 scale-100'}`}
                 />
+              )}
+              
+              {/* Navigation Dots for Mobile */}
+              {mediaItems.length > 1 && (
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 md:hidden">
+                  {mediaItems.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setSelectedImageIndex(index)}
+                      className={`w-2 h-2 rounded-full transition-all duration-200 ${
+                        selectedImageIndex === index 
+                          ? 'bg-white shadow-lg' 
+                          : 'bg-white/50'
+                      }`}
+                    />
+                  ))}
+                </div>
+              )}
+              
+              {/* Swipe Hint for Mobile */}
+              {mediaItems.length > 1 && (
+                <div className="absolute top-4 right-4 bg-black/50 text-white text-xs px-2 py-1 rounded-full md:hidden">
+                  {selectedImageIndex + 1}/{mediaItems.length}
+                </div>
               )}
             </div>
 
