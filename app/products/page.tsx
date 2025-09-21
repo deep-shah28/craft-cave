@@ -1,15 +1,17 @@
 'use client'
 
-import { useState, useEffect, Suspense } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useState, useEffect } from 'react'
+import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Filter, Grid, List, SlidersHorizontal } from 'lucide-react'
 import ProductCard from '@/components/ProductCard'
 import { sampleProducts, categories } from '@/lib/data'
 
-function ProductsPageContent() {
-  const router = useRouter()
+export default function ProductsPage() {
   const searchParams = useSearchParams()
+  const router = useRouter()
+  const pathname = usePathname()
+  
   const [mounted, setMounted] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [sortBy, setSortBy] = useState('name')
@@ -17,13 +19,37 @@ function ProductsPageContent() {
   const [priceRange, setPriceRange] = useState([0, 5000])
   const [showFilters, setShowFilters] = useState(false)
 
+  // Function to update URL with current filter state
+  const updateURLParams = (updates: Record<string, string | null>) => {
+    const current = new URLSearchParams(Array.from(searchParams.entries()))
+    
+    Object.entries(updates).forEach(([key, value]) => {
+      if (value === null || value === '' || (key === 'category' && value === 'All')) {
+        current.delete(key)
+      } else {
+        current.set(key, value)
+      }
+    })
+
+    const search = current.toString()
+    const query = search ? `?${search}` : ''
+    router.replace(`${pathname}${query}`, { scroll: false })
+  }
+
   useEffect(() => {
     setMounted(true)
-    // Get category from URL params if available
-    const categoryFromUrl = searchParams.get('category')
-    if (categoryFromUrl && categories.includes(categoryFromUrl)) {
-      setSelectedCategory(categoryFromUrl)
-    }
+    
+    // Initialize state from URL parameters
+    const category = searchParams.get('category') || 'All'
+    const sort = searchParams.get('sort') || 'name'
+    const view = searchParams.get('view') || 'grid'
+    const minPrice = parseInt(searchParams.get('minPrice') || '0')
+    const maxPrice = parseInt(searchParams.get('maxPrice') || '5000')
+    
+    setSelectedCategory(category)
+    setSortBy(sort)
+    setViewMode(view)
+    setPriceRange([minPrice, maxPrice])
   }, [searchParams])
 
   if (!mounted) {
@@ -85,14 +111,7 @@ function ProductsPageContent() {
                         key={category}
                         onClick={() => {
                           setSelectedCategory(category)
-                          // Update URL with selected category
-                          const params = new URLSearchParams(searchParams.toString())
-                          if (category === 'All') {
-                            params.delete('category')
-                          } else {
-                            params.set('category', category)
-                          }
-                          router.push(`/products?${params.toString()}`)
+                          updateURLParams({ category: category })
                         }}
                         className={`block w-full text-left px-2 py-1.5 lg:px-3 lg:py-2 text-sm rounded-md transition-colors ${
                           selectedCategory === category
@@ -120,7 +139,14 @@ function ProductsPageContent() {
                       max="5000"
                       step="100"
                       value={priceRange[1]}
-                      onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
+                      onChange={(e) => {
+                        const newRange = [priceRange[0], parseInt(e.target.value)]
+                        setPriceRange(newRange)
+                        updateURLParams({ 
+                          minPrice: newRange[0].toString(),
+                          maxPrice: newRange[1].toString()
+                        })
+                      }}
                       className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
                     />
                   </div>
@@ -131,8 +157,11 @@ function ProductsPageContent() {
                   onClick={() => {
                     setSelectedCategory('All')
                     setPriceRange([0, 5000])
-                    // Clear URL params
-                    router.push('/products')
+                    updateURLParams({ 
+                      category: null,
+                      minPrice: null,
+                      maxPrice: null
+                    })
                   }}
                   className="w-full bg-gray-100 text-gray-700 py-1.5 lg:py-2 px-3 lg:px-4 rounded-md hover:bg-gray-200 transition-colors text-sm"
                 >
@@ -156,7 +185,10 @@ function ProductsPageContent() {
                 {/* Sort */}
                 <select
                   value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
+                  onChange={(e) => {
+                    setSortBy(e.target.value)
+                    updateURLParams({ sort: e.target.value })
+                  }}
                   className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-amber-500 focus:border-transparent w-full lg:w-auto bg-white text-gray-900 relative z-10"
                 >
                   <option value="name" className="bg-white text-gray-900">Sort by Name</option>
@@ -167,13 +199,19 @@ function ProductsPageContent() {
                 {/* View Mode */}
                 <div className="hidden md:flex border border-gray-300 rounded-md">
                   <button
-                    onClick={() => setViewMode('grid')}
+                    onClick={() => {
+                      setViewMode('grid')
+                      updateURLParams({ view: 'grid' })
+                    }}
                     className={`p-2 ${viewMode === 'grid' ? 'bg-amber-100 text-amber-600' : 'text-gray-400'}`}
                   >
                     <Grid className="h-4 w-4" />
                   </button>
                   <button
-                    onClick={() => setViewMode('list')}
+                    onClick={() => {
+                      setViewMode('list')
+                      updateURLParams({ view: 'list' })
+                    }}
                     className={`p-2 ${viewMode === 'list' ? 'bg-amber-100 text-amber-600' : 'text-gray-400'}`}
                   >
                     <List className="h-4 w-4" />
@@ -217,13 +255,5 @@ function ProductsPageContent() {
         </div>
       </div>
     </div>
-  )
-}
-
-export default function ProductsPage() {
-  return (
-    <Suspense fallback={<div className="min-h-screen bg-gray-50 flex items-center justify-center"><div className="text-lg">Loading...</div></div>}>
-      <ProductsPageContent />
-    </Suspense>
   )
 }

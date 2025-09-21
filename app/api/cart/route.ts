@@ -19,6 +19,17 @@ export interface CartItem {
   capacity?: string
   comboItems?: string[]
   quantity: number
+  selectedVariants?: {
+    size?: {
+      size: string
+      price: number
+      label: string
+    }
+    decorations?: Array<{
+      name: string
+      price: number
+    }>
+  }
 }
 
 // In-memory storage (use Redis or database in production)
@@ -51,6 +62,23 @@ export async function GET(request: NextRequest) {
   }
 }
 
+// Generate unique ID for product variants
+function generateVariantId(product: any): string {
+  let variantKey = product.id
+  
+  if (product.selectedVariants) {
+    if (product.selectedVariants.size) {
+      variantKey += `-size-${product.selectedVariants.size.size}`
+    }
+    if (product.selectedVariants.decorations && product.selectedVariants.decorations.length > 0) {
+      const decorationNames = product.selectedVariants.decorations.map((d: any) => d.name).sort().join('-')
+      variantKey += `-decorations-${decorationNames}`
+    }
+  }
+  
+  return variantKey
+}
+
 // POST /api/cart - Add item to cart
 export async function POST(request: NextRequest) {
   try {
@@ -67,14 +95,26 @@ export async function POST(request: NextRequest) {
     const sessionId = providedSessionId || getSessionId(request)
     const cart = cartStorage.get(sessionId) || []
     
-    const existingItemIndex = cart.findIndex(item => item.id === product.id)
+    // Generate unique ID for this variant combination
+    const variantId = generateVariantId(product)
+    
+    // Look for existing item with same variant combination
+    const existingItemIndex = cart.findIndex(item => {
+      const itemVariantId = generateVariantId(item)
+      return itemVariantId === variantId
+    })
     
     if (existingItemIndex >= 0) {
-      // Update quantity
+      // Update quantity of existing variant
       cart[existingItemIndex].quantity += 1
     } else {
-      // Add new item
-      cart.push({ ...product, quantity: 1 })
+      // Add new variant as separate item
+      const cartItem = { 
+        ...product, 
+        quantity: 1,
+        id: variantId // Use variant ID for unique identification
+      }
+      cart.push(cartItem)
     }
     
     cartStorage.set(sessionId, cart)

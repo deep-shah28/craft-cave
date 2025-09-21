@@ -76,7 +76,9 @@ const ProductCard = memo(({ product }: ProductCardProps) => {
           src={product.image}
           alt={product.name}
           fill
-          className="object-cover group-hover:scale-105 transition-transform duration-300"
+          className={`object-cover group-hover:scale-105 transition-all duration-300 ${
+            !product.inStock ? 'opacity-40' : 'opacity-100'
+          }`}
         />
         
         {/* Discount Badge */}
@@ -88,10 +90,8 @@ const ProductCard = memo(({ product }: ProductCardProps) => {
         
         {/* Stock Status */}
         {!product.inStock && (
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            <span className="bg-stone-50 text-stone-900 px-3 py-1 rounded-full text-sm font-semibold">
-              Out of Stock
-            </span>
+          <div className="absolute top-3 left-3 bg-stone-900 text-white text-xs px-2 py-1 rounded-full font-semibold">
+            Out of Stock
           </div>
         )}
 
@@ -130,7 +130,7 @@ const ProductCard = memo(({ product }: ProductCardProps) => {
         {/* Product Details */}
         <div className="flex justify-between items-center text-xs text-stone-500 mb-3">
           <span>🕯️ {product.burnTime}</span>
-          <span>📏 {product.size}</span>
+          {product.size ? <span>📏 {product.size}</span> : null}
         </div>
 
         {/* Price */}

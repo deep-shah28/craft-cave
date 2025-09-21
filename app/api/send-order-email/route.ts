@@ -4,10 +4,31 @@ export async function POST(request: NextRequest) {
   try {
     const orderData = await request.json()
     
-    // Format order details for email
-    const cartItems = orderData.cart.map((item: any) => 
-      `• ${item.name} (Qty: ${item.quantity}) - ₹${(item.price * item.quantity).toLocaleString()}`
-    ).join('\n')
+    // Format order details for email with variant information
+    const cartItems = orderData.cart.map((item: any) => {
+      let itemDetails = `• ${item.name} (Qty: ${item.quantity})`
+      
+      // Add variant information if available
+      if (item.selectedVariants) {
+        const variantDetails = []
+        
+        if (item.selectedVariants.size) {
+          variantDetails.push(`Size: ${item.selectedVariants.size.label} (${item.selectedVariants.size.size})`)
+        }
+        
+        if (item.selectedVariants.decorations && item.selectedVariants.decorations.length > 0) {
+          const decorations = item.selectedVariants.decorations.map((d: any) => d.name).join(', ')
+          variantDetails.push(`Decorations: ${decorations}`)
+        }
+        
+        if (variantDetails.length > 0) {
+          itemDetails += `\n    ${variantDetails.join(' | ')}`
+        }
+      }
+      
+      itemDetails += ` - ₹${(item.price * item.quantity).toLocaleString()}`
+      return itemDetails
+    }).join('\n')
     
     const emailContent = {
       to_name: 'Craft Cave Team',
@@ -35,14 +56,7 @@ export async function POST(request: NextRequest) {
         minute: '2-digit'
       })
     }
-
-    // For now, we'll return success. In production, you would integrate with:
-    // 1. EmailJS for client-side email sending
-    // 2. Nodemailer with Gmail SMTP
-    // 3. SendGrid, Mailgun, or other email service
-    
-    console.log('Order Email Content:', emailContent)
-    
+        
     return NextResponse.json({ 
       success: true, 
       message: 'Order notification prepared successfully',

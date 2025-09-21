@@ -8,6 +8,7 @@ export default function OrderConfirmationPage() {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     setMounted(true)
   }, [])
 

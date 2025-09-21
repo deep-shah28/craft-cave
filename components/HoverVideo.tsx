@@ -60,7 +60,6 @@ export default function HoverVideo({ src, poster, alt, className = '' }: HoverVi
           await videoRef.current?.play()
           setHasInteracted(true)
         } catch (error) {
-          console.log('Video autoplay failed on mobile:', error)
         } finally {
           setIsLoading(false)
         }
@@ -82,7 +81,7 @@ export default function HoverVideo({ src, poster, alt, className = '' }: HoverVi
       await videoRef.current.play()
       setHasInteracted(true)
     } catch (error) {
-      console.log('Video play failed:', error)
+      console.error('Video play failed:', error)
     } finally {
       setIsLoading(false)
     }
@@ -104,7 +103,7 @@ export default function HoverVideo({ src, poster, alt, className = '' }: HoverVi
         await videoRef.current.play()
         setHasInteracted(true)
       } catch (error) {
-        console.log('Video play failed:', error)
+        console.error('Video play failed:', error)
       }
     } else {
       videoRef.current.pause()
@@ -121,7 +120,6 @@ export default function HoverVideo({ src, poster, alt, className = '' }: HoverVi
       <video
         ref={videoRef}
         src={src}
-        poster={poster}
         className="w-full h-full object-cover"
         muted
         loop

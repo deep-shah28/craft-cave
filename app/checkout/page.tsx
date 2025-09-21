@@ -10,6 +10,7 @@ import emailjs from '@emailjs/browser'
 
 export default function CheckoutPage() {
   const [mounted, setMounted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const { cart, getCartTotal, clearCart } = useStore()
   const router = useRouter()
   
@@ -68,7 +69,7 @@ export default function CheckoutPage() {
   }
 
   const sendOrderEmails = async () => {
-    try {
+    try {    
       // Format cart items for email with detailed combo information
       const cartItems = cart.map(item => {
         if (item.productType === 'combo' && item.comboDetails) {
@@ -101,8 +102,29 @@ export default function CheckoutPage() {
           
           return comboText.trim()
         } else {
-          // Regular item formatting
-          return `• ${item.name} (Qty: ${item.quantity}) - ₹${(item.price * item.quantity).toLocaleString()}`
+          // Regular item formatting with variant information
+          let itemText = `• ${item.name} (Qty: ${item.quantity})`
+          
+          // Add variant information if available
+          if (item.selectedVariants) {
+            const variantDetails = []
+            
+            if (item.selectedVariants.size) {
+              variantDetails.push(`Size: ${item.selectedVariants.size.label} (${item.selectedVariants.size.size})`)
+            }
+            
+            if (item.selectedVariants.decorations && item.selectedVariants.decorations.length > 0) {
+              const decorations = item.selectedVariants.decorations.map((d: any) => d.name).join(', ')
+              variantDetails.push(`Decorations: ${decorations}`)
+            }
+            
+            if (variantDetails.length > 0) {
+              itemText += `\n    ${variantDetails.join(' | ')}`
+            }
+          }
+          
+          itemText += ` - ₹${(item.price * item.quantity).toLocaleString()}`
+          return itemText
         }
       }).join('\n\n')
 
@@ -161,9 +183,6 @@ export default function CheckoutPage() {
         customerParams
       )
       
-      console.log(`✅ Business notification sent to craftcavebyjinali@gmail.com`)
-      console.log(`✅ Customer confirmation sent to ${formData.email}`)
-      
     } catch (error) {
       console.error('Failed to send order emails:', error)
       // Don't block the order if email fails
@@ -172,6 +191,8 @@ export default function CheckoutPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    if (isSubmitting) return // Prevent double submission
     
     // Validate required fields
     if (!formData.firstName || !formData.lastName || !formData.email || !formData.phone ||
@@ -194,16 +215,24 @@ export default function CheckoutPage() {
       return
     }
 
-    toast.success('Order placed successfully! Sending order details...')
+    setIsSubmitting(true)
+    toast.success('Processing your order...')
     
-    // Send order email automatically
-    await sendOrderEmails()
-    
-    // Process order
-    setTimeout(() => {
-      clearCart()
-      router.push('/order-confirmation')
-    }, 500)
+    try {
+      // Send order email automatically
+      await sendOrderEmails()
+      toast.success('Order placed successfully! Redirecting...')
+      
+      // Process order
+      setTimeout(() => {
+        clearCart()
+        router.push('/order-confirmation')
+      }, 2000)
+    } catch (error) {
+      console.error('Order submission error:', error)
+      toast.error('Failed to process order. Please try again.')
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -461,10 +490,24 @@ export default function CheckoutPage() {
               {/* Place Order Button */}
               <button
                 type="submit"
-                className="w-full bg-amber-800 text-white py-4 px-6 rounded-lg hover:bg-amber-900 transition-colors font-semibold text-lg flex items-center justify-center space-x-2"
+                disabled={isSubmitting}
+                className={`w-full py-4 px-6 rounded-lg transition-colors font-semibold text-lg flex items-center justify-center space-x-2 ${
+                  isSubmitting 
+                    ? 'bg-stone-400 cursor-not-allowed text-white' 
+                    : 'bg-amber-800 text-white hover:bg-amber-900'
+                }`}
               >
-                <Shield className="h-5 w-5" />
-                <span>Place Order - ₹{finalTotal.toLocaleString()}</span>
+                {isSubmitting ? (
+                  <>
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                    <span>Processing Order...</span>
+                  </>
+                ) : (
+                  <>
+                    <Shield className="h-5 w-5" />
+                    <span>Place Order - ₹{finalTotal.toLocaleString()}</span>
+                  </>
+                )}
               </button>
             </form>
           </div>
@@ -487,6 +530,21 @@ export default function CheckoutPage() {
                     />
                     <div className="flex-1 min-w-0">
                       <h3 className="text-sm font-semibold truncate text-stone-800">{item.name}</h3>
+                      
+                      {/* Display variant information */}
+                      {item.selectedVariants && (
+                        <div className="text-xs text-stone-400 mt-1">
+                          {item.selectedVariants.size && (
+                            <div>Size: {item.selectedVariants.size.label}</div>
+                          )}
+                          {item.selectedVariants.decorations && item.selectedVariants.decorations.length > 0 && (
+                            <div>
+                              Decorations: {item.selectedVariants.decorations.map((d: {name: string, price: number}) => d.name).join(', ')}
+                            </div>
+                          )}
+                        </div>
+                      )}
+                      
                       <p className="text-xs text-stone-500">Qty: {item.quantity}</p>
                     </div>
                     <span className="text-sm font-medium">

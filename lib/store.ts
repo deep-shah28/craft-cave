@@ -21,6 +21,17 @@ export interface Product {
   material?: string
   capacity?: string
   comboItems?: string[] // For pre-made combos
+  variants?: {
+    sizes?: Array<{
+      size: string
+      price: number
+      label: string
+    }>
+    decorations?: Array<{
+      name: string
+      price: number
+    }>
+  }
   // Detailed combo information for custom combos
   comboDetails?: {
     basket: {
@@ -59,6 +70,17 @@ export interface ComboBuilder {
 
 export interface CartItem extends Product {
   quantity: number
+  selectedVariants?: {
+    size?: {
+      size: string
+      price: number
+      label: string
+    }
+    decorations?: Array<{
+      name: string
+      price: number
+    }>
+  }
 }
 
 interface Store {

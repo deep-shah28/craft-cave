@@ -17,6 +17,8 @@ export default function ProductDetailPage() {
   const [mounted, setMounted] = useState(false)
   const [quantity, setQuantity] = useState(1)
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
+  const [selectedSizeIndex, setSelectedSizeIndex] = useState(0)
+  const [selectedDecorations, setSelectedDecorations] = useState<string[]>([])
 
   useEffect(() => {
     setMounted(true)
@@ -54,9 +56,48 @@ export default function ProductDetailPage() {
     ...(product.videos || []).map((video: string) => ({ type: 'video', src: video, alt: `${product.name} video` }))
   ]
 
+  // Calculate dynamic price based on selections
+  const getCurrentPrice = () => {
+    let basePrice = product.price
+    
+    // If there are size variants, use the selected size price
+    if (product.variants?.sizes) {
+      const selectedSize = product.variants.sizes[selectedSizeIndex]
+      basePrice = selectedSize.price
+    }
+    
+    // Add decoration prices
+    const decorationPrice = selectedDecorations.reduce((total, decorationName) => {
+      const decoration = product.variants?.decorations?.find(d => d.name === decorationName)
+      return total + (decoration?.price || 0)
+    }, 0)
+    
+    return basePrice + decorationPrice
+  }
+
+  const toggleDecoration = (decorationName: string) => {
+    setSelectedDecorations(prev => 
+      prev.includes(decorationName) 
+        ? prev.filter(name => name !== decorationName)
+        : [...prev, decorationName]
+    )
+  }
+
   const handleAddToCart = () => {
+    const currentPrice = getCurrentPrice()
+    const productVariant = {
+      ...product,
+      price: currentPrice,
+      selectedVariants: {
+        size: product.variants?.sizes?.[selectedSizeIndex],
+        decorations: selectedDecorations.map(name => 
+          product.variants?.decorations?.find(d => d.name === name)
+        ).filter(Boolean)
+      }
+    }
+    
     for (let i = 0; i < quantity; i++) {
-      addToCart(product)
+      addToCart(productVariant)
     }
     toast.success(`Added ${quantity} ${product.name} to cart!`)
   }
@@ -123,12 +164,21 @@ export default function ProductDetailPage() {
                       selectedImageIndex === index ? 'border-amber-800' : 'border-stone-200'
                     }`}
                   >
-                    <Image
-                      src={media.type === 'video' ? product.image : media.src}
-                      alt={media.alt}
-                      fill
-                      className="object-cover"
-                    />
+                    {media.type === 'video' ? (
+                      <video
+                        src={media.src}
+                        className="w-full h-full object-cover"
+                        muted
+                        preload="metadata"
+                      />
+                    ) : (
+                      <Image
+                        src={media.src}
+                        alt={media.alt}
+                        fill
+                        className="object-cover"
+                      />
+                    )}
                     {media.type === 'video' && (
                       <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
                         <Play className="h-4 w-4 text-white" />
@@ -176,11 +226,92 @@ export default function ProductDetailPage() {
               </div>
             </div>
 
+            {/* Variants Section */}
+            {product.variants && (
+              <div className="space-y-6">
+                {/* Size Selection */}
+                {product.variants.sizes && (
+                  <div>
+                    <h3 className="text-lg font-semibold text-stone-900 mb-3">Choose Size</h3>
+                    <div className="grid grid-cols-3 gap-3">
+                      {product.variants.sizes.map((sizeOption, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setSelectedSizeIndex(index)}
+                          className={`relative p-4 border-2 rounded-lg transition-all duration-200 ${
+                            selectedSizeIndex === index
+                              ? 'border-amber-800 bg-amber-50 ring-2 ring-amber-200'
+                              : 'border-stone-200 hover:border-stone-300 bg-white'
+                          }`}
+                        >
+                          <div className="text-center">
+                            <div className="font-semibold text-stone-900">{sizeOption.label}</div>
+                            <div className="text-sm text-stone-600 mt-1">{sizeOption.size}</div>
+                            <div className="text-lg font-bold text-amber-800 mt-2">₹{sizeOption.price}</div>
+                          </div>
+                          {selectedSizeIndex === index && (
+                            <div className="absolute -top-2 -right-2 bg-amber-800 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs">
+                              ✓
+                            </div>
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Decoration Options */}
+                {product.variants.decorations && (
+                  <div>
+                    <h3 className="text-lg font-semibold text-stone-900 mb-3">Add Decorations</h3>
+                    <div className="space-y-3">
+                      {product.variants.decorations.map((decoration, index) => (
+                        <label
+                          key={index}
+                          className="flex items-center justify-between p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 hover:bg-stone-50"
+                        >
+                          <div className="flex items-center space-x-3">
+                            <input
+                              type="checkbox"
+                              checked={selectedDecorations.includes(decoration.name)}
+                              onChange={() => toggleDecoration(decoration.name)}
+                              className="w-5 h-5 text-amber-800 border-stone-300 rounded focus:ring-amber-500"
+                            />
+                            <div>
+                              <div className="font-medium text-stone-900">{decoration.name}</div>
+                              <div className="text-sm text-stone-600">🌼 Beautiful hand-placed decoration</div>
+                            </div>
+                          </div>
+                          <div className="text-lg font-semibold text-amber-800">+₹{decoration.price}</div>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
             {/* Price */}
-            <div className="flex items-baseline space-x-3">
-              <span className="text-3xl font-bold text-stone-900">₹{product.price.toLocaleString()}</span>
-              {product.originalPrice && (
-                <span className="text-xl text-stone-500 line-through">₹{product.originalPrice.toLocaleString()}</span>
+            <div className="space-y-2">
+              <div className="flex items-baseline space-x-3">
+                <span className="text-3xl font-bold text-stone-900">₹{getCurrentPrice().toLocaleString()}</span>
+                {product.originalPrice && product.originalPrice > getCurrentPrice() && (
+                  <>
+                    <span className="text-xl text-stone-500 line-through">₹{product.originalPrice.toLocaleString()}</span>
+                    <span className="bg-red-100 text-red-800 text-sm font-medium px-2 py-1 rounded">
+                      {Math.round(((product.originalPrice - getCurrentPrice()) / product.originalPrice) * 100)}% OFF
+                    </span>
+                  </>
+                )}
+              </div>
+              {product.variants?.sizes && selectedDecorations.length > 0 && (
+                <div className="text-sm text-stone-600">
+                  <div>Base: ₹{product.variants.sizes[selectedSizeIndex].price}</div>
+                  <div>Decorations: +₹{selectedDecorations.reduce((total, name) => {
+                    const decoration = product.variants?.decorations?.find(d => d.name === name)
+                    return total + (decoration?.price || 0)
+                  }, 0)}</div>
+                </div>
               )}
             </div>
 

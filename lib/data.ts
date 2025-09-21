@@ -16,7 +16,7 @@ export const sampleProducts: Product[] = [
     inStock: true,
     fragrance: 'Lavender',
     burnTime: '40-45 hours',
-    size: '300g'
+    size: ''
   },
   {
     id: '2',
@@ -31,7 +31,7 @@ export const sampleProducts: Product[] = [
     inStock: true,
     fragrance: 'Vanilla Spice',
     burnTime: '35-40 hours',
-    size: '250g'
+    size: ''
   },
   {
     id: '3',
@@ -47,7 +47,7 @@ export const sampleProducts: Product[] = [
     inStock: true,
     fragrance: 'Jasmine',
     burnTime: '45-50 hours',
-    size: '350g'
+    size: ''
   },
   {
     id: '4',
@@ -62,7 +62,7 @@ export const sampleProducts: Product[] = [
     inStock: true,
     fragrance: 'Sandalwood',
     burnTime: '50-55 hours',
-    size: '400g'
+    size: ''
   },
   {
     id: '5',
@@ -77,7 +77,7 @@ export const sampleProducts: Product[] = [
     inStock: true,
     fragrance: 'Citrus Blend',
     burnTime: '30-35 hours',
-    size: '200g'
+    size: ''
   },
   {
     id: '6',
@@ -92,13 +92,13 @@ export const sampleProducts: Product[] = [
     inStock: false,
     fragrance: 'Rose',
     burnTime: '42-48 hours',
-    size: '320g'
+    size: ''
   },
   {
     id: '7',
     name: 'Premium Scented Candle Collection',
-    price: 1299,
-    originalPrice: 1699,
+    price: 150,
+    originalPrice: 280,
     image: 'https://res.cloudinary.com/dqgprx49p/image/upload/v1758385357/572be8b3-36f5-46f2-9f12-6c06a2db73a1_hhyqyi.jpg',
     images: [
       'https://res.cloudinary.com/dqgprx49p/image/upload/v1758385357/572be8b3-36f5-46f2-9f12-6c06a2db73a1_hhyqyi.jpg',
@@ -116,8 +116,8 @@ export const sampleProducts: Product[] = [
   {
     id: '8',
     name: 'Artisan Scented Candle',
-    price: 1149,
-    originalPrice: 1549,
+    price: 140,
+    originalPrice: 0,
     image: 'https://res.cloudinary.com/dqgprx49p/image/upload/v1758386324/435eeeab-2863-4ee9-bb95-e335faf7ca65_zp7ilf.jpg',
     images: [
       'https://res.cloudinary.com/dqgprx49p/image/upload/v1758386324/435eeeab-2863-4ee9-bb95-e335faf7ca65_zp7ilf.jpg',
@@ -130,32 +130,35 @@ export const sampleProducts: Product[] = [
     inStock: true,
     fragrance: 'Artisan Blend',
     burnTime: '40-45 hours',
-    size: '300g'
+    size: ''
   },
   {
     id: '9',
     name: 'Premium Luxury Candle',
-    price: 1399,
-    originalPrice: 1899,
+    price: 140,
+    originalPrice: 0,
     image: 'https://res.cloudinary.com/dqgprx49p/image/upload/v1758387109/b16463a8-f5a7-488b-a4b0-43aead47460d_rx1bvd.jpg',
     images: [
       'https://res.cloudinary.com/dqgprx49p/image/upload/v1758387109/b16463a8-f5a7-488b-a4b0-43aead47460d_rx1bvd.jpg',
-      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758387469/55c3bf5d-bc6a-4975-b57a-adfba6812997_clrqxn.jpg'
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758387469/55c3bf5d-bc6a-4975-b57a-adfba6812997_clrqxn.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758404874/WhatsApp_Image_2025-09-21_at_3.16.56_AM_jo1jtq.jpg'
     ],
-    videos: ['https://res.cloudinary.com/dqgprx49p/video/upload/v1758387205/_MConverter.eu_2e97c5aa-f523-4b64-8156-4d069ff6e8c8_wvjtqx.mp4'],
+    videos: ['https://res.cloudinary.com/dqgprx49p/video/upload/v1758387205/_MConverter.eu_2e97c5aa-f523-4b64-8156-4d069ff6e8c8_wvjtqx.mp4',
+      'https://res.cloudinary.com/dqgprx49p/video/upload/v1758404878/WhatsApp_Video_2025-09-21_at_3.17.05_AM_xsarr3.mp4'
+    ],
     description: 'Premium luxury candle featuring an elegant design and sophisticated fragrance. Perfect for creating an upscale ambiance in any space.',
     category: 'Scented Candles',
     productType: 'candle',
     inStock: true,
     fragrance: 'Luxury Blend',
     burnTime: '48-52 hours',
-    size: '400g'
+    size: ''
   },
   {
     id: '10',
     name: 'Elegant Scented Candle',
-    price: 1249,
-    originalPrice: 1649,
+    price: 150,
+    originalPrice: 175,
     image: 'https://res.cloudinary.com/dqgprx49p/image/upload/v1758387814/94d6b6ce-e6e7-4243-86e8-8b3ebf338694_azjx5x.jpg',
     images: [
       'https://res.cloudinary.com/dqgprx49p/image/upload/v1758387814/94d6b6ce-e6e7-4243-86e8-8b3ebf338694_azjx5x.jpg'
@@ -170,7 +173,209 @@ export const sampleProducts: Product[] = [
     inStock: true,
     fragrance: 'Elegant Blend',
     burnTime: '44-48 hours',
-    size: '320g'
+    size: ''
+  },
+  {
+    id: '11',
+    name: 'Classic Scented Candle',
+    price: 150,
+    originalPrice: 0,
+    image: 'https://res.cloudinary.com/dqgprx49p/image/upload/v1758403916/WhatsApp_Image_2025-09-21_at_3.00.02_AM_o9cfgv.jpg',
+    images: [
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758403916/WhatsApp_Image_2025-09-21_at_3.00.02_AM_o9cfgv.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758400799/05213b3f-e14d-4160-a6ef-3948230f0fbd_uwtkvz.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758402233/candle1_ws6cux.jpg'
+    ],
+    videos: ['https://res.cloudinary.com/dqgprx49p/video/upload/v1758400872/cdf8e3c4-3ee0-445e-8053-cfcaf964da41_gbiz84.mp4'],
+    description: 'Classic scented candle with timeless appeal and exceptional fragrance quality. A perfect addition to any home collection.',
+    category: 'Scented Candles',
+    productType: 'candle',
+    inStock: true,
+    fragrance: 'Classic Blend',
+    burnTime: '42-46 hours',
+    size: '',
+    variants: {
+      sizes: [
+        { size: '3.5 inch', price: 150, label: 'Small' },
+        { size: '4.5 inch', price: 370, label: 'Medium' },
+        { size: '5.5 inch', price: 570, label: 'Large' }
+      ],
+      decorations: [
+        { name: 'Daisy Flower Decoration', price: 25 }
+      ]
+    }
+  },
+  {
+    id: '12',
+    name: 'Premium Artisan Candle',
+    price: 160,
+    originalPrice: 200,
+    image: 'https://res.cloudinary.com/dqgprx49p/image/upload/v1758401638/IMG_2771_chmjef.jpg',
+    images: [
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758401638/IMG_2771_chmjef.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758401636/IMG_2770_ne1ow1.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758401412/1c1e431c-de9a-4292-8e81-11307c9c8b30_m1cm4h.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758401413/a8a47bbb-3cae-4268-b4ec-709c00499a5d_qwbczs.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758401413/11a11d01-c3ba-43af-9e91-f683b47623c5_asbheg.jpg'
+    ],
+    videos: [],
+    description: 'Premium artisan candle handcrafted with the finest ingredients. Features an exquisite design and long-lasting fragrance that transforms any space into a sanctuary of relaxation.',
+    category: 'Scented Candles',
+    productType: 'candle',
+    inStock: true,
+    fragrance: 'Artisan Blend',
+    burnTime: '45-50 hours',
+    size: ''
+  },
+  {
+    id: '13',
+    name: 'Luxury Designer Candle',
+    price: 40,
+    image: 'https://res.cloudinary.com/dqgprx49p/image/upload/v1758401987/2b56c48b-1c69-4479-b531-983fc92ce938_grbxbp.jpg',
+    images: [
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758401987/2b56c48b-1c69-4479-b531-983fc92ce938_grbxbp.jpg'
+    ],
+    videos: [
+      'https://res.cloudinary.com/dqgprx49p/video/upload/v1758401989/bb129d48-90d7-4ba3-b4f6-ac928d64144e_idujr5.mp4'
+    ],
+    description: 'Luxury designer candle with sophisticated aesthetics and premium fragrance. Perfect for creating an ambiance of elegance and refinement in any setting.',
+    category: 'Scented Candles',
+    productType: 'candle',
+    inStock: true,
+    fragrance: 'Designer Blend',
+    burnTime: '50-55 hours',
+    size: '',
+    variants: {
+      decorations: [
+        {
+          name: 'Flower Decoration',
+          price: 10
+        }
+      ]
+    }
+  },
+  {
+    id: '14',
+    name: 'Handcrafted Specialty Candle',
+    price: 150,
+    originalPrice: 200,
+    image: 'https://res.cloudinary.com/dqgprx49p/image/upload/v1758402406/WhatsApp_Image_2025-09-21_at_2.36.01_AM_kzj03i.jpg',
+    images: [
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758402406/WhatsApp_Image_2025-09-21_at_2.36.01_AM_kzj03i.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758402405/WhatsApp_Image_2025-09-21_at_2.36.01_AM_1_lupaf3.jpg'
+    ],
+    videos: [
+      'https://res.cloudinary.com/dqgprx49p/video/upload/v1758402566/WhatsApp_Video_2025-09-21_at_2.38.56_AM_csvd6a.mp4'
+    ],
+    description: 'Handcrafted specialty candle with unique design and premium fragrance blend. Perfect for creating a warm and inviting atmosphere in any space.',
+    category: 'Scented Candles',
+    productType: 'candle',
+    inStock: true,
+    fragrance: 'Specialty Blend',
+    burnTime: '40-45 hours',
+    size: ''
+  },
+  {
+    id: '15',
+    name: 'Contemporary Artisan Candle',
+    price: 350,
+    originalPrice: 500,
+    image: 'https://res.cloudinary.com/dqgprx49p/image/upload/v1758402790/WhatsApp_Image_2025-09-21_at_2.41.08_AM_1_cwb6gf.jpg',
+    images: [
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758402790/WhatsApp_Image_2025-09-21_at_2.41.08_AM_1_cwb6gf.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758402793/WhatsApp_Image_2025-09-21_at_2.41.08_AM_jixujp.jpg'
+    ],
+    videos: [
+      'https://res.cloudinary.com/dqgprx49p/video/upload/v1758402829/WhatsApp_Video_2025-09-21_at_2.42.56_AM_npbdof.mp4'
+    ],
+    description: 'Contemporary artisan candle featuring modern design elements and carefully curated fragrance. Ideal for contemporary home settings and sophisticated décor.',
+    category: 'Scented Candles',
+    productType: 'candle',
+    inStock: true,
+    fragrance: 'Contemporary Blend',
+    burnTime: '48-52 hours',
+    size: ''
+  },
+  {
+    id: '16',
+    name: 'Elegant Signature Candle',
+    price: 380,
+    originalPrice: 450,
+    image: 'https://res.cloudinary.com/dqgprx49p/image/upload/v1758403029/WhatsApp_Image_2025-09-21_at_2.45.50_AM_sehxvl.jpg',
+    images: [
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758403029/WhatsApp_Image_2025-09-21_at_2.45.50_AM_sehxvl.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758403031/WhatsApp_Image_2025-09-21_at_2.45.53_AM_hhhaov.jpg'
+    ],
+    videos: [
+      'https://res.cloudinary.com/dqgprx49p/video/upload/v1758403034/WhatsApp_Video_2025-09-21_at_2.45.56_AM_ymzbnl.mp4'
+    ],
+    description: 'Elegant signature candle with distinctive design and premium fragrance composition. Crafted with attention to detail for discerning customers who appreciate quality.',
+    category: 'Scented Candles',
+    productType: 'candle',
+    inStock: true,
+    fragrance: 'Signature Blend',
+    burnTime: '46-50 hours',
+    size: ''
+  },
+  {
+    id: '17',
+    name: 'Refined Artisan Candle',
+    price: 150,
+    originalPrice: 175,
+    image: 'https://res.cloudinary.com/dqgprx49p/image/upload/v1758403205/WhatsApp_Image_2025-09-21_at_2.48.39_AM_ymiem2.jpg',
+    images: [
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758403205/WhatsApp_Image_2025-09-21_at_2.48.39_AM_ymiem2.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758403202/WhatsApp_Image_2025-09-21_at_2.48.17_AM_1_x82fhk.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758403202/WhatsApp_Image_2025-09-21_at_2.48.17_AM_i4dqpq.jpg'
+    ],
+    videos: [],
+    description: 'Refined artisan candle with exquisite craftsmanship and sophisticated fragrance profile. Perfect for creating an atmosphere of luxury and tranquility in any space.',
+    category: 'Scented Candles',
+    productType: 'candle',
+    inStock: true,
+    fragrance: 'Refined Blend',
+    burnTime: '44-48 hours',
+    size: ''
+  },
+  {
+    id: '18',
+    name: 'Premium Luxury Candle',
+    price: 1399,
+    originalPrice: 1799,
+    image: 'https://res.cloudinary.com/dqgprx49p/image/upload/v1758403408/WhatsApp_Image_2025-09-21_at_2.50.21_AM_shsjse.jpg',
+    images: [
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758403408/WhatsApp_Image_2025-09-21_at_2.50.21_AM_shsjse.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758403410/WhatsApp_Image_2025-09-21_at_2.52.11_AM_koaq9z.jpg'
+    ],
+    videos: [],
+    description: 'Premium luxury candle with superior quality ingredients and elegant presentation. Designed for those who demand the finest in home fragrance and ambiance.',
+    category: 'Scented Candles',
+    productType: 'candle',
+    inStock: true,
+    fragrance: 'Luxury Blend',
+    burnTime: '50-55 hours',
+    size: ''
+  },
+  {
+    id: '19',
+    name: 'Exquisite Handmade Candle',
+    price: 350,
+    originalPrice: 450,
+    image: 'https://res.cloudinary.com/dqgprx49p/image/upload/v1758404082/WhatsApp_Image_2025-09-21_at_3.02.03_AM_e6g9ft.jpg',
+    images: [
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758404082/WhatsApp_Image_2025-09-21_at_3.02.03_AM_e6g9ft.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758403881/WhatsApp_Image_2025-09-21_at_2.59.17_AM_dln9wx.jpg'
+    ],
+    videos: [
+      'https://res.cloudinary.com/dqgprx49p/video/upload/v1758403893/WhatsApp_Video_2025-09-21_at_2.59.27_AM_wyn43f.mp4'
+    ],
+    description: 'Exquisite handmade candle crafted with premium materials and exceptional attention to detail. Perfect for creating a luxurious and warm atmosphere in any refined setting.',
+    category: 'Scented Candles',
+    productType: 'candle',
+    inStock: true,
+    fragrance: 'Exquisite Blend',
+    burnTime: '52-56 hours',
+    size: ''
   },
 
   // Baskets
@@ -282,7 +487,7 @@ export const sampleProducts: Product[] = [
     price: 599,
     originalPrice: 799,
     image: 'https://images.unsplash.com/photo-1603006905003-be475563bc59?w=400&h=400&fit=crop',
-    images: ['https://images.unsplash.com/photo-1603006905003-be475563bc59?w=400&h=400&fit=crop'],
+    images: ['https://images.unsplash.com/photo-1603006905003-be475563bc59?w=400&h=400&fit=crop',],
     description: '100% pure essential oil blend for diffusers. Complements candle fragrances perfectly.',
     category: 'Accessories',
     productType: 'accessory',
