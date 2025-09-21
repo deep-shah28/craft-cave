@@ -113,6 +113,7 @@ function ProductsPageContent() {
                         onClick={() => {
                           setSelectedCategory(category)
                           updateURLParams({ category: category })
+                          setShowFilters(false)
                         }}
                         className={`block w-full text-left px-2 py-1.5 lg:px-3 lg:py-2 text-sm rounded-md transition-colors ${
                           selectedCategory === category
@@ -163,6 +164,7 @@ function ProductsPageContent() {
                       minPrice: null,
                       maxPrice: null
                     })
+                    setShowFilters(false)
                   }}
                   className="w-full bg-gray-100 text-gray-700 py-1.5 lg:py-2 px-3 lg:px-4 rounded-md hover:bg-gray-200 transition-colors text-sm"
                 >
