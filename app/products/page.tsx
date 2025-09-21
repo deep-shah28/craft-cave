@@ -1,13 +1,13 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Filter, Grid, List, SlidersHorizontal } from 'lucide-react'
 import ProductCard from '@/components/ProductCard'
 import { sampleProducts, categories } from '@/lib/data'
 
-export default function ProductsPage() {
+function ProductsPageContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
@@ -50,6 +50,7 @@ export default function ProductsPage() {
     setSortBy(sort)
     setViewMode(view)
     setPriceRange([minPrice, maxPrice])
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [searchParams])
 
   if (!mounted) {
@@ -255,5 +256,13 @@ export default function ProductsPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-50 flex items-center justify-center"><div className="text-lg">Loading...</div></div>}>
+      <ProductsPageContent />
+    </Suspense>
   )
 }

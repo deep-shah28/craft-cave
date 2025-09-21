@@ -377,6 +377,127 @@ export const sampleProducts: Product[] = [
     burnTime: '52-56 hours',
     size: ''
   },
+  {
+    id: '20',
+    name: 'Traditional Decorative Diya',
+    price: 120,
+    originalPrice: 160,
+    image: 'https://res.cloudinary.com/dqgprx49p/image/upload/v1758438819/b2aedf73-ec19-422d-ae55-9eb8528899e3_p3ob3w.jpg',
+    images: [
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758438819/b2aedf73-ec19-422d-ae55-9eb8528899e3_p3ob3w.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758438820/IMG_2778_tfncbr.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758438819/IMG_2777_mvgnrn.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758438818/IMG_2776_q7ayh6.jpg'
+    ],
+    videos: [],
+    description: 'Beautiful traditional decorative diya handcrafted with intricate designs. Perfect for festivals, celebrations, and creating a warm, spiritual ambiance in your home.',
+    category: 'Diyas',
+    productType: 'diya',
+    inStock: true,
+    material: 'Clay',
+    burnTime: '2-3 hours',
+    size: ''
+  },
+  {
+    id: '21',
+    name: 'Elegant Festive Diya',
+    price: 110,
+    originalPrice: 150,
+    image: 'https://res.cloudinary.com/dqgprx49p/image/upload/v1758439327/1dec794a-7a8f-4e0d-9601-b49113777a53_tgnsnl.jpg',
+    images: [
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758439327/1dec794a-7a8f-4e0d-9601-b49113777a53_tgnsnl.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758439328/IMG_2781_a7dydr.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758439329/IMG_2782_tfhjaz.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758439327/IMG_2780_oyy5wv.jpg'
+    ],
+    videos: [],
+    description: 'Elegant festive diya with beautiful craftsmanship and traditional appeal. Ideal for Diwali, religious ceremonies, and special occasions to bring divine light and positive energy.',
+    category: 'Diyas',
+    productType: 'diya',
+    inStock: true,
+    material: 'Clay',
+    burnTime: '2-3 hours',
+    size: ''
+  },
+  {
+    id: '22',
+    name: 'Handcrafted Artistic Diya',
+    price: 100,
+    originalPrice: 135,
+    image: 'https://res.cloudinary.com/dqgprx49p/image/upload/v1758439494/ada89c91-c517-4efb-bf2c-bcc9e88af2c3_rwn2hx.jpg',
+    images: [
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758439494/ada89c91-c517-4efb-bf2c-bcc9e88af2c3_rwn2hx.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758439496/IMG_2784_dmyyh1.jpg'
+    ],
+    videos: [],
+    description: 'Handcrafted artistic diya with unique design and traditional craftsmanship. Perfect for creating a serene atmosphere during festivals and special occasions.',
+    category: 'Diyas',
+    productType: 'diya',
+    inStock: true,
+    material: 'Clay',
+    burnTime: '2-3 hours',
+    size: ''
+  },
+  {
+    id: '23',
+    name: 'Classic Traditional Diya',
+    price: 95,
+    originalPrice: 125,
+    image: 'https://res.cloudinary.com/dqgprx49p/image/upload/v1758439761/2ca86213-e7a3-4a04-98ce-068ea20250ea_ctjb4k.jpg',
+    images: [
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758439761/2ca86213-e7a3-4a04-98ce-068ea20250ea_ctjb4k.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758439762/IMG_2788_aki1d3.jpg'
+    ],
+    videos: [],
+    description: 'Classic traditional diya with timeless design and authentic craftsmanship. Perfect for daily prayers, meditation, and bringing peace and prosperity to your home.',
+    category: 'Diyas',
+    productType: 'diya',
+    inStock: true,
+    material: 'Clay',
+    burnTime: '2-3 hours',
+    size: ''
+  },
+  {
+    id: '24',
+    name: 'Ornate Decorative Diya',
+    price: 130,
+    originalPrice: 170,
+    image: 'https://res.cloudinary.com/dqgprx49p/image/upload/v1758440088/a1678ca2-1b47-4509-953d-82d9f37ad09c_kpluaa.jpg',
+    images: [
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758440088/a1678ca2-1b47-4509-953d-82d9f37ad09c_kpluaa.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758440088/IMG_2790_bd0lno.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758440449/IMG_2792_fqrmjb.jpg'
+    ],
+    videos: [],
+    description: 'Ornate decorative diya featuring intricate patterns and elegant design. Perfect for special celebrations and creating a divine atmosphere in your sacred space.',
+    category: 'Diyas',
+    productType: 'diya',
+    inStock: true,
+    material: 'Clay',
+    burnTime: '2-3 hours',
+    size: ''
+  },
+  {
+    id: '25',
+    name: 'Premium Festive Diya',
+    price: 140,
+    originalPrice: 180,
+    image: 'https://res.cloudinary.com/dqgprx49p/image/upload/v1758440802/IMG_2796_nelrcx.jpg',
+    images: [
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758440802/IMG_2796_nelrcx.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758440800/db949cf3-9428-4161-8ba7-74e4cd0c66e0_z0024o.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758440799/d0859145-8d0e-4a7c-855a-ea725d9e0ee5_d2wa9e.jpg',
+      'https://res.cloudinary.com/dqgprx49p/image/upload/v1758440797/19e3204b-4938-47c1-986a-e2f4b2615418_i1mljl.jpg'
+    ],
+    videos: [],
+    description: 'Premium festive diya with exquisite detailing and superior craftsmanship. Ideal for grand celebrations, puja ceremonies, and adding elegance to your festive decorations.',
+    category: 'Diyas',
+    productType: 'diya',
+    inStock: true,
+    material: 'Clay',
+    burnTime: '2-3 hours',
+    size: ''
+  },
 
   // Baskets
   {
@@ -553,6 +674,7 @@ export const categories = [
   'Floral',
   'Energizing',
   'Scented Candles',
+  'Diyas',
   'Hampers',
   'Baskets',
   'Accessories'
@@ -561,6 +683,7 @@ export const categories = [
 export const productTypes = [
   { value: 'all', label: 'All Products' },
   { value: 'candle', label: 'Candles' },
+  { value: 'diya', label: 'Diyas' },
   { value: 'hamper', label: 'Ready Hampers' },
   { value: 'basket', label: 'Baskets & Boxes' },
   { value: 'accessory', label: 'Accessories' }

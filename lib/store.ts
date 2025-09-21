@@ -12,7 +12,7 @@ export interface Product {
   videos?: string[] // Support for product videos
   description: string
   category: string
-  productType: 'candle' | 'hamper' | 'basket' | 'accessory' | 'combo'
+  productType: 'candle' | 'diya' | 'hamper' | 'basket' | 'accessory' | 'combo'
   inStock: boolean
   fragrance?: string
   burnTime?: string
