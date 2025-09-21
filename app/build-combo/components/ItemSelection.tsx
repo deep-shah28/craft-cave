@@ -2,7 +2,8 @@ import { memo } from 'react'
 import { motion } from 'framer-motion'
 import { Plus, X, Gift, ArrowRight } from 'lucide-react'
 import { Product } from '@/lib/hooks/useProducts'
-import { ComboBuilder, StepType } from '../types'
+import { ComboBuilder } from '@/lib/store'
+import { StepType } from '../types'
 import Image from 'next/image'
 
 interface ItemSelectionProps {
