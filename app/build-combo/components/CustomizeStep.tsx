@@ -1,11 +1,12 @@
 import { memo } from 'react'
 import { motion } from 'framer-motion'
 import { MessageCircle, Palette, ShoppingCart } from 'lucide-react'
-import { ComboBuilder, StepType } from '../types'
+import { ComboBuilder } from '@/lib/store'
+import { StepType } from '../types'
 
 interface CustomizeStepProps {
   comboBuilder: ComboBuilder
-  onCustomizationChange: (key: keyof ComboBuilder['customizations'], value: string) => void
+  onCustomizationChange: (key: 'giftMessage' | 'wrapping' | 'ribbon', value: string) => void
   onWrappingChange: (option: string) => void
   onStepChange: (step: StepType) => void
   onFinishCombo: () => void
@@ -78,7 +79,7 @@ const CustomizeStep = memo(({
         {comboBuilder.selectedItems.length > 0 && (
           <div className="space-y-2">
             <h4 className="text-xs lg:text-sm font-medium text-stone-700 mb-2">Selected Items:</h4>
-            {comboBuilder.selectedItems.map((item, index) => (
+            {comboBuilder.selectedItems.map((item: any, index: number) => (
               <div key={item.id} className="flex justify-between items-center p-1.5 lg:p-2 bg-stone-100 border border-stone-200 rounded-md">
                 <div className="flex items-center space-x-2">
                   <span className="text-xs bg-stone-300 text-stone-700 px-1.5 lg:px-2 py-0.5 lg:py-1 rounded-full font-medium">

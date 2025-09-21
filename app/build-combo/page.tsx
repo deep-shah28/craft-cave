@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useMemo } from 'react'
 import { AnimatePresence } from 'framer-motion'
-import { useStore, Product } from '@/lib/store'
+import { useStore, Product, ComboBuilder } from '@/lib/store'
 import { useBaskets, useComboItems } from '@/lib/hooks/useProducts'
 import toast from 'react-hot-toast'
 
@@ -13,7 +13,7 @@ import ItemSelection from './components/ItemSelection'
 import CustomizeStep from './components/CustomizeStep'
 
 // Import types
-import { ComboBuilder, StepType } from './types'
+import { StepType } from './types'
 
 
 export default function BuildComboPage() {
@@ -71,7 +71,7 @@ export default function BuildComboPage() {
     })
   }, [])
 
-  const updateComboCustomization = useCallback((key: keyof ComboBuilder['customizations'], value: string) => {
+  const updateComboCustomization = useCallback((key: 'giftMessage' | 'wrapping' | 'ribbon', value: string) => {
     setComboBuilder(prev => ({
       ...prev,
       customizations: {
